@@ -6,8 +6,13 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { BannerComponent } from './banner/banner.component';
 import { SkillsComponent } from './skills/skills.component';
-import { HistoryComponent } from './history/history.component';
 import { AboutMeComponent } from './about-me/about-me.component';
+import { FooterComponent } from './footer/footer.component';
+import { ContactoComponent } from './contacto/contacto.component';
+import { ResumenComponent } from './resumen/resumen.component';
+import { ProyectsComponent } from './proyects/proyects.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +20,17 @@ import { AboutMeComponent } from './about-me/about-me.component';
     HeaderComponent,
     BannerComponent,
     SkillsComponent,
-    HistoryComponent,
-    AboutMeComponent
+    AboutMeComponent,
+    FooterComponent,
+    ContactoComponent,
+    ResumenComponent,
+    ProyectsComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

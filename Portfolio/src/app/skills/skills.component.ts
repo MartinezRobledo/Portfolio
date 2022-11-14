@@ -9,7 +9,10 @@ import { ThemePalette } from '@angular/material/core';
 })
 export class SkillsComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+
+
+   }
 
   ngOnInit(): void {
   }

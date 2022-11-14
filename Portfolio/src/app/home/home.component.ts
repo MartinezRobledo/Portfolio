@@ -1,12 +1,5 @@
-<<<<<<< HEAD
-import { Component, HostListener, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-=======
-import { HostListener } from '@angular/core';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, OnInit } from '@angular/core';
 import { SetEverythingOffExcept } from '../services/NavHelpers'
-
->>>>>>> 250003e2d4514b6aa165d0ddc8cdc9f58e3ec0da
 
 @Component({
   selector: 'app-home',
@@ -14,16 +7,14 @@ import { SetEverythingOffExcept } from '../services/NavHelpers'
   styleUrls: ['./home.component.sass'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent implements OnInit {
-  ngOnInit(){
 
-<<<<<<< HEAD
-  }
+export class HomeComponent implements OnInit {
   
   toggle:boolean = false;
   alternarClase(){
       this.toggle = !this.toggle;
-=======
+  }
+  
 @HostListener('window:scroll', ['$event'])
   public onViewportScroll(e) {
     let child = e.srcElement.children[0]
@@ -51,9 +42,5 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
->>>>>>> 250003e2d4514b6aa165d0ddc8cdc9f58e3ec0da
   }
-
-  constructor(private route:ActivatedRoute) {
-   }
 }

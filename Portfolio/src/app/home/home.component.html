@@ -1,7 +1,6 @@
-<body data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0" [ngClass]="{'mobile-nav-active':toggle}">
   <!-- ======= Mobile nav toggle button ======= -->
-  <!-- <button type="button" class="mobile-nav-toggle d-xl-none"><i class="bi bi-list mobile-nav-toggle"></i></button> -->
-  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+  <!-- <button type="button" class="mobile-nav-toggle d-xl-none" (click)="alternarClase()"><i class="bi bi-list mobile-nav-toggle"></i></button> -->
+  <i class="bi bi-list mobile-nav-toggle d-xl-none" (click)="alternarClase()"></i>
 
   <app-header></app-header>
   <app-banner></app-banner>
@@ -15,5 +14,3 @@
   </main><!-- End #main -->
 
   <app-footer></app-footer>
-  
-</body>

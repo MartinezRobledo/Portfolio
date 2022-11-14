@@ -1,9 +1,11 @@
+//Modulos
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { InViewportModule } from 'ng-in-viewport';
 import { AppRoutingModule } from './app-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+//Componentes
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 import { BannerComponent } from './banner/banner.component';
 import { SkillsComponent } from './skills/skills.component';
 import { AboutMeComponent } from './about-me/about-me.component';
@@ -11,13 +13,11 @@ import { FooterComponent } from './footer/footer.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { ResumenComponent } from './resumen/resumen.component';
 import { ProyectsComponent } from './proyects/proyects.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     BannerComponent,
     SkillsComponent,
     AboutMeComponent,
@@ -30,9 +30,10 @@ import { HomeComponent } from './home/home.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    InViewportModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

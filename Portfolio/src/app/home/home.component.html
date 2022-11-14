@@ -1,23 +1,32 @@
+<!-- https://stackoverflow.com/questions/36101756/angular2-routing-with-hashtag-to-page-anchor -->
+<!-- https://stackoverflow.com/questions/36101756/angular2-routing-with-hashtag-to-page-anchor -->
+<!-- https://medium.com/angular-chile/angular-componentes-y-sus-ciclos-de-vida-aa639e13a688 -->
+
+<body data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0" [ngClass]="{'mobile-nav-active':toggle}">
   <!-- ======= Mobile nav toggle button ======= -->
   <!-- <button type="button" class="mobile-nav-toggle d-xl-none"><i class="bi bi-list mobile-nav-toggle"></i></button> -->
-  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
-
-  <app-header></app-header>
-
-  <app-banner></app-banner>
-
+  <i class="bi bi-list mobile-nav-toggle d-xl-none" [ngClass]="{'bi-x':toggle}" (click)="alternarClase()"></i>
+    <!-- ======= Header ======= -->
+  <header id="header" class="d-flex flex-column justify-content-center">
+    <nav id="navbar" class="navbar nav-menu">
+      <ul>
+        <li><a href="#hero" class="nav-link scrollto active" [routerLinkActive]="'active'"><i class="bx bx-home"></i> <span>Home</span></a></li>
+        <li><a href="#about" class="nav-link scrollto" [routerLinkActive]="'active'"><i class="bx bx-user"></i> <span>Sobre Mí</span></a></li>
+        <li><a href="#skills" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Skills</span></a></li>
+        <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Resumen</span></a></li>
+        <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Proyectos</span></a></li>
+        <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contacto</span></a></li>
+      </ul>
+    </nav><!-- .nav-menu -->
+  </header>
+  <!-- End Header -->
+  <app-banner id="banner"></app-banner>
   <main id="main">
-
-    <app-about-me></app-about-me>
-
-    <app-skills></app-skills>
-
-    <app-resumen></app-resumen>
-
-    <app-proyects></app-proyects>
-
-    <app-contacto></app-contacto>
-
+      <app-about-me id="acerca"></app-about-me>
+      <app-skills id="habilidades"></app-skills>
+      <app-resumen id="resumen"></app-resumen>
+      <app-proyects id="proyectos"></app-proyects>
+      <app-contacto id="contacto"></app-contacto>
   </main><!-- End #main -->
-
   <app-footer></app-footer>
+</body>

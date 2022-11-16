@@ -4,19 +4,14 @@ import { SetEverythingOffExcept } from '../services/NavHelpers'
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.sass'],
+  styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class HomeComponent implements OnInit {
   
-  toggle:boolean = false;
-  alternarClase(){
-      this.toggle = !this.toggle;
-  }
-  
 @HostListener('window:scroll', ['$event'])
-  public onViewportScroll(e) {
+  public onViewportScroll(e:any) {
     let child = e.srcElement.children[0]
     let scrollToTop = e.srcElement.children[0].scrollTop
     if(scrollToTop >= 0 && scrollToTop <= 708 ) {
@@ -25,11 +20,11 @@ export class HomeComponent implements OnInit {
       SetEverythingOffExcept('about-nav-id', document)
     }else if(scrollToTop >= 1255 && scrollToTop <= 1670 ) {
       SetEverythingOffExcept('skills-nav-id', document)
-    } else if(scrollToTop >= 1660 && scrollToTop <= 2700 ) {
+    } else if(scrollToTop >= 1660 && scrollToTop <= 2953 ) {
       SetEverythingOffExcept('resume-nav-id', document)
-    } else if(scrollToTop >= 2701 && scrollToTop <= 2973 ) {
+    } else if(scrollToTop >= 2954 && scrollToTop <= 3800 ) {
       SetEverythingOffExcept('portfolio-nav-id', document)
-    } else if(scrollToTop >= 2974 && scrollToTop <= 4000 ) {
+    } else if(scrollToTop >= 3801 && scrollToTop <= 4500 ) {
       SetEverythingOffExcept('contact-nav-id', document)
     }
     //console.log(bottom)

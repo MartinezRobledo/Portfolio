@@ -1,5 +1,5 @@
   <!-- ======= Header ======= -->
-  <header id="header" class="d-flex flex-column justify-content-center">
+  <header id="header" class="d-flex flex-column justify-content-center" [style.left]="oculto">
 
     <nav id="navbar" class="navbar nav-menu">
       <ul>
@@ -10,6 +10,7 @@
         <li><a id="portfolio-nav-id" href="#portfolio" class="nav-link scrollto" [ngClass]="{'active':activo == 'proyects'}" (click)="activo = 'proyects'"><i class="bx bx-book-content"></i> <span>Proyectos</span></a></li>
         <li><a id="contact-nav-id" href="#contact" class="nav-link scrollto" [ngClass]="{'active':activo == 'contacto'}" (click)="activo = 'contacto'"><i class="bx bx-envelope"></i> <span>Contacto</span></a></li>
       </ul>
+      <i class="bi bi-list mobile-nav-toggle d-xl-none" (click)="alternarClase()"></i>
     </nav><!-- .nav-menu -->
 
   </header>

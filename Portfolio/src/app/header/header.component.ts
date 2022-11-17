@@ -7,13 +7,10 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   activo = "hero";
-  oculto:string = '-300px';
+  visible:boolean = false;
 
   alternarClase():void{
-    if(this.oculto === '0')
-      this.oculto = '-300px'
-    else
-      this.oculto = '0'
+    this.visible = !this.visible
   }
     
   constructor() { }

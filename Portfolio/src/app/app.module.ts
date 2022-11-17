@@ -15,6 +15,7 @@ import { ResumenComponent } from './resumen/resumen.component';
 import { ProyectsComponent } from './proyects/proyects.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,13 +28,14 @@ import { HeaderComponent } from './header/header.component';
     ResumenComponent,
     ProyectsComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    InViewportModule
+    InViewportModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,6 +8,8 @@ export class DataService {
 
   constructor() { }
 
+  login:boolean = true;
+
   skills:Habilidad[] = [
     {name: 'HTML', value: 90, type:'success'},
     {name: 'CSS', value: 80, type:'success'},
@@ -20,6 +22,10 @@ export class DataService {
     {name: 'Python', value: 30, type:'danger'},
     {name: 'Java', value: 25, type:'danger'},
   ]
+
+  addSkill(skill:Habilidad){
+    this.skills.push(skill);
+  }
 
 }
 

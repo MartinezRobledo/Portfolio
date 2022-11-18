@@ -9,8 +9,6 @@ import { SetEverythingOffExcept } from '../services/NavHelpers'
 })
 
 export class HomeComponent implements OnInit {
-
-  login:boolean = true;
   
 @HostListener('window:scroll', ['$event'])
   public onViewportScroll(e:any) {

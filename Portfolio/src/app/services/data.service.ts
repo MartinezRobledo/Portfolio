@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Habilidad } from '../Models/Habilidad';
+import { Persona } from '../Models/Persona';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,18 @@ export class DataService {
   constructor() { }
 
   login:boolean = true;
+
+  persona:Persona = {
+    name: 'Adrián',
+    lastname: 'Martínez',
+    email: 'adrianfmart@gmail.com',
+    ocupation: 'Freelance',
+    birthplace: 'Montevideo, Uruguay',
+    birthdate: '1996-11-22',
+    location: 'Merlo, Buenos Aires, Argentina',
+    level: 'Universitario',
+    phone: 1128932478
+  }
 
   skills:Habilidad[] = [
     {name: 'HTML', value: 90, type:'success'},
@@ -25,6 +38,14 @@ export class DataService {
 
   addSkill(skill:Habilidad){
     this.skills.push(skill);
+  }
+
+  removeSkill(i:number){
+    this.skills.splice(i, 1);
+  }
+
+  updateSkill(i:number, skill:Habilidad){
+    this.skills[i] = skill;
   }
 
 }

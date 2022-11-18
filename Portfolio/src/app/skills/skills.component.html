@@ -3,7 +3,10 @@
     <div class="container" data-aos="fade-up">
 
       <div class="section-title">
-        <h2>Skills <a routerLink="/skills" routerLinkActive='active-link'><i class='bx bx-edit-alt' *ngIf="edit"></i></a></h2>
+        <div class="edit-title">
+          <h2>Skills</h2>
+          <i routerLink="/skills" routerLinkActive='visually-hidden'  class='bi bi-pen-fill edit-icon' *ngIf="edit"></i>
+        </div>
         <p>Me gusta trabajar en equipo, colaborar con los demás, comunicarme de forma asertiva y aprender. 
             Me resulta facil adaptarme a los cambios e integrarme con otras personas. 
             Busco siempre crecer tanto como persona como profesionalmente y ayudar a los demas a que tambien logren sus objetivos.
@@ -14,36 +17,48 @@
       <div class="row skills-content">
         <div class="col-lg-6">
           <div *ngFor="let skill of skills.slice(0,(skills.length)/2); let i=index">
-            <div class="progress">
-              <span class="skill">{{skill.name}}<i class="val">{{skill.value}}%</i></span>
-                  <p><ngb-progressbar [type]="skill.type" [value]="skill.value"></ngb-progressbar></p>
+            <div class="row align-items-center">
+              <button class="col-auto rounded-circle btn btn-danger p-2 btn-close" *ngIf="delete" (click)="eliminarElemento(i)"></button>
+              <div class="col progress">
+                <span class="skill">{{skill.name}}<i class="val">{{skill.value}}%</i></span>
+                    <p><ngb-progressbar [type]="skill.type" [value]="skill.value"></ngb-progressbar></p>
+              </div>
+              <input *ngIf="update" type="range" class="form-range p-2" min="0" max="100" [(ngModel)]="skill.value" name="value" (ngModelChange)="actualizarElemento(i,skill.value)">
             </div>
           </div>
         </div>
         <div class="col-lg-6">
           <div *ngFor="let skill of skills.slice((skills.length)/2, skills.length); let i=index">
-            <div class="progress">
-              <span class="skill">{{skill.name}}<i class="val">{{skill.value}}%</i></span>
-                  <p><ngb-progressbar [type]="skill.type" [value]="skill.value"></ngb-progressbar></p>
+            <div class="row align-items-center">
+              <button class="col-auto rounded-circle btn btn-danger p-2 btn-close" *ngIf="delete" (click)="eliminarElemento(((skills.length)/2)+i)"></button>
+              <div class="col progress">
+                <span class="skill">{{skill.name}}<i class="val">{{skill.value}}%</i></span>
+                <p><ngb-progressbar [type]="skill.type" [value]="skill.value"></ngb-progressbar></p>
+              </div>
+              <input *ngIf="update" type="range" class="form-range p-2" min="0" max="100" [(ngModel)]="skill.value" name="value" (ngModelChange)="actualizarElemento(((skills.length)/2)+i,skill.value)">
             </div>
           </div>
         </div>
       </div>
-      <div *ngIf="false">
+      <div routerLinkActive="visually-hidden" [routerLinkActiveOptions]="{exact: true}">
         <form class="php-email-form" #updateForm="ngForm" (ngSubmit)="onSubmit(updateForm)">
           <div class="row m-3">
             <div class="col-6 form-group">
-              <input type="text" name="name" class="form-control" id="name" placeholder="Ejemplo: HTML5" ngModel>
+              <input type="text" name="name" class="form-control" id="name" placeholder="Ejemplo: HTML5" required ngModel>
             </div>
             <div class="col-3 form-group mt-3 mt-md-0">
               <input type="number" class="form-control" name="value" id="value" placeholder="Value: 95" required ngModel>
             </div>
             <div class="col-3">
-              <button class="btn btn-primary" type="submit">Añadir</button>
+              <button class="btn btn-primary" type="submit">Añadir habilidad nueva</button>
             </div>
           </div>
         </form>
-        <div class="text-center m-3"><a class="btn btn-success" routerLink="/">Guardar cambios y volver</a></div>
+        <div class="d-flex justify-content-center">
+          <div class="m-3"><button class="btn btn-danger" (click)="habilitarEliminar()">{{habilitar.eliminar}} eliminar habilidades</button></div>
+          <div class="m-3"><button class="btn btn-primary" (click)="habilitarActualizar()">{{habilitar.actualizar}} modificar habilidades</button></div>
+          <div class="m-3"><a class="btn btn-success" routerLink="/">Guardar cambios y volver</a></div>
+        </div>
     </div>
     </div>
 </section><!-- End Skills Section -->

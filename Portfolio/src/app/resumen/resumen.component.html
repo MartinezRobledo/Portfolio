@@ -3,7 +3,10 @@
         <div class="container" data-aos="fade-up">
   
           <div class="section-title">
-            <h2>Resumen</h2>
+            <div class="edit-title">
+              <h2>Resumen</h2>
+              <i routerLink="/resumen" routerLinkActive='visually-hidden'  class='bi bi-pen-fill edit-icon' *ngIf="edit"></i>
+            </div>
             <p>Me recibí de tecnico en Electrónica en la EESTN°1 De Merlo y fue ahi donde hice mi primer contacto 
                 con la programacion, la cual luego se convertiría en una de mis mayores pasiones.
                 Tambien soy un amante de la matemática y la física, los gustos que me llevaron a estudiar la carrera de 

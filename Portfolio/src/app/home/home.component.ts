@@ -9,6 +9,8 @@ import { SetEverythingOffExcept } from '../services/NavHelpers'
 })
 
 export class HomeComponent implements OnInit {
+
+  login:boolean = true;
   
 @HostListener('window:scroll', ['$event'])
   public onViewportScroll(e:any) {
@@ -28,9 +30,9 @@ export class HomeComponent implements OnInit {
       SetEverythingOffExcept('contact-nav-id', document)
     }
     //console.log(bottom)
-    console.log(child.scrollHeight)
-    console.log(child.scrollTop)
-    console.log(child.clientHeight)
+    // console.log(child.scrollHeight)
+    // console.log(child.scrollTop)
+    // console.log(child.clientHeight)
   }
 
   constructor() {

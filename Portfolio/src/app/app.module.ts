@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { InViewportModule } from 'ng-in-viewport';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 //Componentes
 import { AppComponent } from './app.component';
 import { BannerComponent } from './banner/banner.component';
@@ -15,7 +16,8 @@ import { ResumenComponent } from './resumen/resumen.component';
 import { ProyectsComponent } from './proyects/proyects.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
-import { FormsModule } from '@angular/forms';
+import { DataService } from './services/data.service';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +39,7 @@ import { FormsModule } from '@angular/forms';
     InViewportModule,
     FormsModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

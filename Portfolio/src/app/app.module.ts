@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { InViewportModule } from 'ng-in-viewport';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //Componentes
 import { AppComponent } from './app.component';
 import { BannerComponent } from './banner/banner.component';
@@ -37,7 +37,8 @@ import { DataService } from './services/data.service';
     AppRoutingModule,
     NgbModule,
     InViewportModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

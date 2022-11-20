@@ -1,55 +1,93 @@
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
-        <div class="container" data-aos="fade-up">
-  
-          <div class="section-title">
-            <div class="edit-title">
-              <h2>Sobre mí</h2>
-              <i routerLink="/about" routerLinkActive='visually-hidden'  class='bi bi-pen-fill edit-icon' *ngIf="edit"></i>
-            </div>
-            <p>Soy una persona muy reflexiva y apasionada por los numeros. 
-                Me gustan los retos, busco ponerme objetivos dificiles pero alcanzables. 
-                Considero que lo mas importante es la familia y la salud.
-                Disfruto de todo lo que me haga pensar, y siempre busco nuevas victorias que festejar. 
-                “Sigue hambriento, sigue alocado. Siempre he deseado eso para mí”
-            </p>
+<section id="about" class="about">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <div class="edit-title">
+        <h2>Sobre mí</h2>
+        <i routerLink="/about" routerLinkActive='visually-hidden'  class='bi bi-pen-fill edit-icon' *ngIf="edit"></i>
+      </div>
+      <p>Soy una persona muy reflexiva y apasionada por los numeros. 
+          Me gustan los retos, busco ponerme objetivos dificiles pero alcanzables. 
+          Considero que lo mas importante es la familia y la salud.
+          Disfruto de todo lo que me haga pensar, y siempre busco nuevas victorias que festejar. 
+          “Sigue hambriento, sigue alocado. Siempre he deseado eso para mí”
+      </p>
+    </div>
+    <div class="row mb-3">
+      <div class="col-lg-4">
+        <img src="../../assets/img/Sweetpain-perfil.webp" class="img-fluid" alt="">
+      </div>
+      <div class="col-lg-8 pt-4 pt-lg-0 content">
+        <h3>Web Developer</h3>
+        <p class="fst-italic">
+          "El software es una gran combinación entre arte e ingeniería"
+        </p>
+        <div class="row">
+          <div class="col-lg-6">
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <strong>Fecha de Nacimiento:</strong> <span>{{adrian.birthdate | date}}</span></li>
+              <li><i class="bi bi-chevron-right"></i> <strong>Lugar de Nacimiento:</strong> <span>{{adrian.birthplace}}</span></li>
+              <li><i class="bi bi-chevron-right"></i> <strong>Cel:</strong> <span>(+54) {{adrian.phone}}</span></li>
+              <li><i class="bi bi-chevron-right"></i> <strong>Ciudad:</strong> <span>{{adrian.location}}</span></li>
+            </ul>
           </div>
-  
-          <div class="row">
-            <div class="col-lg-4">
-              <img src="../../assets/img/Sweetpain-perfil.webp" class="img-fluid" alt="">
-            </div>
-            <div class="col-lg-8 pt-4 pt-lg-0 content">
-              <h3>Web Developer</h3>
-              <p class="fst-italic">
-                "El software es una gran combinación entre arte e ingeniería"
-              </p>
-              <div class="row">
-                <div class="col-lg-6">
-                  <ul>
-                    <li><i class="bi bi-chevron-right"></i> <strong>Fecha de Nacimiento:</strong> <span>{{adrian.birthdate | date}}</span></li>
-                    <li><i class="bi bi-chevron-right"></i> <strong>Lugar de Nacimiento:</strong> <span>{{adrian.birthplace}}</span></li>
-                    <li><i class="bi bi-chevron-right"></i> <strong>Cel:</strong> <span>(+54) {{adrian.phone}}</span></li>
-                    <li><i class="bi bi-chevron-right"></i> <strong>Ciudad:</strong> <span>{{adrian.location}}</span></li>
-                  </ul>
-                </div>
-                <div class="col-lg-6">
-                  <ul>
-                    <li><i class="bi bi-chevron-right"></i> <strong>Edad:</strong> <span>{{edad}}</span></li>
-                    <li><i class="bi bi-chevron-right"></i> <strong>Nivel de estudios:</strong> <span>{{adrian.level}}</span></li>
-                    <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>{{adrian.email}}</span></li>
-                    <li><i class="bi bi-chevron-right"></i> <strong>Ocupacion actual:</strong> <span>{{adrian.ocupation}}</span></li>
-                  </ul>
-                </div>
-              </div>
-              <p>
-                Practico el budismo Soka desde hace 2 años y colaboro en impulsar la revolucion humana de 
-                Nichiren Daishonin. <br>
-                "Si enciendes una luz para iluminar el camino de otro, incluso iluminaras tu propio camino" 
-                南 無 妙 法 蓮 華 經
-              </p>
-            </div>
+          <div class="col-lg-6">
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <strong>Edad:</strong> <span>{{edad}}</span></li>
+              <li><i class="bi bi-chevron-right"></i> <strong>Nivel de estudios:</strong> <span>{{adrian.level}}</span></li>
+              <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>{{adrian.email}}</span></li>
+              <li><i class="bi bi-chevron-right"></i> <strong>Ocupacion actual:</strong> <span>{{adrian.ocupation}}</span></li>
+            </ul>
           </div>
-  
         </div>
-      </section><!-- End About Section -->
+        <p>
+          Practico el budismo Soka desde hace 2 años y colaboro en impulsar la revolucion humana de 
+          Nichiren Daishonin. <br>
+          "Si enciendes una luz para iluminar el camino de otro, incluso iluminaras tu propio camino" 
+          南 無 妙 法 蓮 華 經
+        </p>
+      </div>
+    </div>
+    <div routerLinkActive="visually-hidden" [routerLinkActiveOptions]="{exact: true}">
+      <form class="form-group">
+        <div class="row">
+          <div class="col m-3">
+            <div class="row form-group">
+              <label for="birthdate" class="mb-1">Fecha de Nacimiento:</label>
+              <input type="date" name="birthdate" class="form-control mb-2" id="birthdate" (keyup)="changeField($event)">
+            </div>
+            <div class="row form-group mt-3 mt-md-0">
+              <label for="birthplace" class="mb-1">Lugar de Nacimiento:</label>
+              <input type="text" class="form-control mb-2" name="birthplace" id="birthplace" placeholder="{{adrian.birthplace}}" (keyup)="changeField($event)">
+            </div>
+            <div class="row">
+              <label for="phone" class="mb-1">Celular:</label>
+              <input type="number" class="form-control mb-2" name="phone" id="phone" placeholder="{{adrian.phone}}" (keyup)="changeField($event)">
+            </div>
+            <div class="row">
+              <label for="location" class="mb-1">Ciudad:</label>
+              <input type="text" class="form-control" name="location" id="location" placeholder="{{adrian.location}}" (keyup)="changeField($event)">
+            </div>
+          </div>
+          <div class="col m-3">
+            <div class="row form-group mt-3 mt-md-0">
+              <label for="level" class="mb-1">Nivel de Estudios:</label>
+              <input type="text" class="form-control mb-2" name="level" id="level" placeholder="{{adrian.level}}" (keyup)="changeField($event)">
+            </div>
+            <div class="row">
+              <label for="email" class="mb-1">Email:</label>
+              <input type="email" class="form-control mb-2" name="email" id="email" placeholder="{{adrian.email}}" (keyup)="changeField($event)">
+            </div>
+            <div class="row">
+              <label for="ocupation" class="mb-1">Ocupación actual:</label>
+              <input type="text" class="form-control mb-2" name="ocupation" id="ocupation" placeholder="{{adrian.ocupation}}" (keyup)="changeField($event)">
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="m-3"><button type="reset" class="btn btn-primary" (click)="restoreData()">Limpiar</button></div>
+          <div class="m-3"><a class="btn btn-success" routerLink="/" (click)="saveChanges()">Guardar cambios y volver</a></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section><!-- End About Section -->

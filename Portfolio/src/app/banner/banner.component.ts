@@ -1,6 +1,8 @@
 // @ts-nocheck
 import { Component } from '@angular/core';
 import Typewriter from 't-writer.js'
+import { Persona } from '../Models/Persona';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-banner',
@@ -10,10 +12,10 @@ import Typewriter from 't-writer.js'
 
 export class BannerComponent implements OnInit{
 
-  persona:any = {
-    nombre: 'Adrián',
-    apellido: 'Martínez',
-    titulo: 'desarrollador Full Stacks Jr'
+  persona:Persona;
+
+  constructor(private dataService:DataService){
+    this.persona = dataService.persona;
   }
 
   ngOnInit(): void {
@@ -31,14 +33,14 @@ export class BannerComponent implements OnInit{
   })
   
   writer
-    .type('Soy ' + this.persona.titulo)
+    .type('Soy ' + this.persona.titulo[0])
     .rest(600)
     .changeOps({ deleteSpeed: 80 })
-    .remove(28)
-    .type('estudiante de Ingeniería')
+    .remove(this.persona.titulo[0].length)
+    .type(this.persona.titulo[1])
     .rest(600)
     .changeOps({ deleteSpeed: 20 })
-    .remove(21)
+    .remove(this.persona.titulo[1].length)
     .clear()
     .start()
   }

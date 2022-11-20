@@ -11,16 +11,21 @@ export class DataService {
 
   login:boolean = true;
 
-  persona:Persona = {
-    name: 'Adrián',
-    lastname: 'Martínez',
-    email: 'adrianfmart@gmail.com',
-    ocupation: 'Freelance',
-    birthplace: 'Montevideo, Uruguay',
-    birthdate: '1996-11-22',
-    location: 'Merlo, Buenos Aires, Argentina',
-    level: 'Universitario',
-    phone: 1128932478
+  persona:Persona = new Persona(
+    'Adrián',
+    'Martínez',
+    '1996-11-22',
+    'Merlo, Buenos Aires, Argentina',
+    'Montevideo, Uruguay',
+    1128932478,
+    'Universitario',
+    'adrianfmart@gmail.com',
+    'Freelance',
+    ['Desarrollador Full Stacks Jr.', 'Estudiante de Ingeniería'] 
+  );
+
+  updatePersona(persona:Persona){
+    this.persona = Object.assign({}, persona);
   }
 
   skills:Habilidad[] = [

@@ -17,6 +17,7 @@ import { ProyectsComponent } from './proyects/proyects.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { DataService } from './services/data.service';
+import { ModalComponent } from './shared/modal/modal.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { DataService } from './services/data.service';
     ProyectsComponent,
     HomeComponent,
     HeaderComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,

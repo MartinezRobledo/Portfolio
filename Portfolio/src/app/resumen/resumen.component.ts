@@ -42,4 +42,8 @@ export class ResumenComponent implements OnInit {
     this.dataService.formation = this.formation.slice();
     this.validateEdition();
   }
+
+  openModal(){
+    
+  }
 }

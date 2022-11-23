@@ -1,0 +1,13 @@
+<ng-container *ngIf="show">
+    <div class="modal" #modalBack>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{title}}</h4>
+                <button (click)="show = false;">X</button>
+            </div>
+            <div class="modal-body">
+                <ng-content></ng-content>
+            </div>
+        </div>
+    </div>
+</ng-container>

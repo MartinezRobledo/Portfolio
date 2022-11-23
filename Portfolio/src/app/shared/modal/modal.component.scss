@@ -42,8 +42,11 @@
             text-shadow: 1px 1px #fff;
             border-radius: 20%;
             box-shadow: 1px 1px 1px #fff;
+            transition: all 0.3s ease;
             &:hover{
-                opacity: 0.5;
+                color: #fff;
+                background-color: rgb(14, 112, 250);
+                text-shadow: 1px 1px rgb(14, 112, 250);
             }
         }
         
@@ -51,6 +54,8 @@
     &-title{
         font-size: 24px;
         font-weight: 500;
+        border-bottom: 1px solid black;
+        margin: 10px;
     }
     &-body{
         padding: 32px;

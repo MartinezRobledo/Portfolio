@@ -43,7 +43,15 @@ export class ResumenComponent implements OnInit {
     this.validateEdition();
   }
 
-  openModal(){
-    
+  onSubmit(form:any){
+    let newFormation = {
+      degree: form.degree,
+      rangeTime: form.since + form.until,
+      institution: form.institution,
+      syllabus: form.syllabus,
+      linkToSyllabus: form.linkToSyllabus,
+      icon: ''
+    }
+    this.formation.push(newFormation);
   }
 }

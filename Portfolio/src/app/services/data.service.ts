@@ -37,7 +37,6 @@ export class DataService {
       syllabus: 'Plan de estudios',
       linkToSyllabus: 'https://ingenieria.unlam.edu.ar/index.php?seccion=3&idArticulo=30',
       icon: '../../assets/img/unlamlogo.png',
-      class:'col-1 p-1'
     },
     {
       degree: 'Desarrollador Web Full Stacks',
@@ -46,7 +45,6 @@ export class DataService {
       syllabus: 'Plan de estudios Angular & Java',
       linkToSyllabus: 'https://www.argentina.gob.ar/produccion/argentina-programa/segunda-etapa',
       icon: '../../assets/img/arg-programa.png',
-      class:'col-2 p-1'
     },
     {
       degree: 'Desarrollador Web Full Stacks',
@@ -55,7 +53,6 @@ export class DataService {
       syllabus: 'Plan de estudios VUE.js & Python',
       linkToSyllabus: '',
       icon: '../../assets/img/codoAcodo.png',
-      class:'col-2 p-1'
     },
   ];
 

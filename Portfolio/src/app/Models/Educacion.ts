@@ -5,5 +5,4 @@ export class Education{
     syllabus:string;
     linkToSyllabus:string;
     icon:string;
-    class:string;
 }

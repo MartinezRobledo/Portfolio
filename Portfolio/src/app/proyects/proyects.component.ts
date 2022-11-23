@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Proyects } from '../Models/Proyects';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-proyects',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProyectsComponent implements OnInit {
 
-  constructor() { }
+  proyects:Proyects[] = [];
+
+  constructor(private dataService:DataService) {
+    this.proyects = this.dataService.proyects.slice();
+  }
 
   ngOnInit(): void {
   }

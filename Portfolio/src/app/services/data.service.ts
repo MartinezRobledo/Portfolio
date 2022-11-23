@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Education } from '../Models/Educacion';
 import { Habilidad } from '../Models/Habilidad';
 import { Persona } from '../Models/Persona';
+import { Proyects } from '../Models/Proyects';
 
 @Injectable({
   providedIn: 'root'
@@ -82,6 +83,44 @@ export class DataService {
   updateSkill(i:number, skill:Habilidad){
     this.skills[i] = skill;
   }
+
+  proyects:Proyects[] = [
+    {
+      title: 'Portfolio',
+      type: 'Web',
+      class: 'filter-web',
+      linkThumb: '../../assets/img/portfolio/thumbPortfolio.png',
+      linkProyect: 'https://glowing-travesseiro-631628.netlify.app/'
+    },
+    {
+      title: 'Caliuma Construcciones',
+      type: 'Web',
+      class: 'filter-web',
+      linkThumb: '../../assets/img/portfolio/thumbCaliuma.png',
+      linkProyect: 'https://chimerical-meringue-220df9.netlify.app/#/'
+    },
+    {
+      title: 'Calculadora con tema oscuro',
+      type: 'App',
+      class: 'filter-app',
+      linkThumb: '../../assets/img/portfolio/thumbCalculadora.png',
+      linkProyect: 'https://golden-belekoy-909d83.netlify.app/'
+    },
+    {
+      title: 'Librerías propias en C',
+      type: 'App',
+      class: 'filter-app',
+      linkThumb: '../../assets/img/portfolio/gitgithub.png',
+      linkProyect: 'https://github.com/MartinezRobledo/Librerias-Propias-C'
+    },
+    {
+      title: 'Algoritmos BFS y DFS en C++',
+      type: 'App',
+      class: 'filter-app',
+      linkThumb: '../../assets/img/portfolio/gitgithub.png',
+      linkProyect: 'https://github.com/MartinezRobledo/ProgramacionCompetitiva'
+    },
+  ]
 
 }
 

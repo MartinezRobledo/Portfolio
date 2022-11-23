@@ -1,91 +1,100 @@
-    <!-- ======= Resume Section ======= -->
-    <section id="resume" class="resume">
-        <div class="container" data-aos="fade-up">
-  
-          <div class="section-title">
-            <div class="edit-title">
-              <h2>Resumen</h2>
-              <i routerLink="/resumen" routerLinkActive='visually-hidden'  class='bi bi-pen-fill edit-icon' *ngIf="edit"></i>
+<!-- ======= Resume Section ======= -->
+<section id="resume" class="resume">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <div class="edit-title">
+        <h2>Resumen</h2>
+        <i routerLink="/resumen" routerLinkActive='visually-hidden'  class='bi bi-pen-fill edit-icon' *ngIf="edit" (click)="validateEdition()"></i>
+      </div>
+      <p>Me recibí de tecnico en Electrónica en la EESTN°1 De Merlo y fue ahi donde hice mi primer contacto 
+          con la programacion, la cual luego se convertiría en una de mis mayores pasiones.
+          Tambien soy un amante de la matemática y la física, los gustos que me llevaron a estudiar la carrera de 
+          ingeniería. Comence estudiando ingeniería electronica, luego pase por industrial hasta que finalmente 
+          gracias a un curso de programacion competitiva brindado por la UNLaM para el ICPC descubri mi talento 
+          para la programación.
+      </p>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <h3 class="resume-title">Educación</h3>
+        <div class="d-flex flex-row"  *ngFor="let education of formation; let i=index">
+          <button class="rounded-circle btn btn-danger p-2 btn-close m-close" (click)="eliminarElemento(i)" *ngIf="edition"></button>
+          <div class="resume-item">
+            <h4>{{education.degree}}</h4>
+            <h5>{{education.rangeTime}}</h5>
+            <div class="row">
+                <img  [src]="education.icon" [alt]="education.institution" [class]="education.class">
+                <p class="col-11 m-0 p-0 align-self-center"><b><em>{{education.institution}}</em></b></p>
             </div>
-            <p>Me recibí de tecnico en Electrónica en la EESTN°1 De Merlo y fue ahi donde hice mi primer contacto 
-                con la programacion, la cual luego se convertiría en una de mis mayores pasiones.
-                Tambien soy un amante de la matemática y la física, los gustos que me llevaron a estudiar la carrera de 
-                ingeniería. Comence estudiando ingeniería electronica, luego pase por industrial hasta que finalmente 
-                gracias a un curso de programacion competitiva brindado por la UNLaM para el ICPC descubri mi talento 
-                para la programación.
-            </p>
+            <p class="mb-0">{{education.syllabus}}</p>
+            <a [href]="education.linkToSyllabus">
+                {{education.linkToSyllabus}}</a>
           </div>
-  
-          <div class="row">
-            <div class="col-lg-6">
-              <h3 class="resume-title">Educación</h3>
-              <div class="resume-item">
-                <h4>Ingeniería Informática</h4>
-                <h5>2017 - en curso</h5>
-                <div class="row">
-                    <img  src="../../assets/img/unlamlogo.png" alt="codoAcodo" class="col-1 p-1">
-                    <p class="col-11 m-0 p-0 align-self-center"><b><em>Universidad Nacional de La Matanza, Buenos Aires, Argentina</em></b></p>
-                </div>
-                <p class="mb-0">Plan de estudio 2009:</p>
-                <a href="https://ingenieria.unlam.edu.ar/index.php?seccion=3&idArticulo=30">
-                    https://ingenieria.unlam.edu.ar/index.php?seccion=3&idArticulo=30</a>
-              </div>
-              <div class="resume-item">
-                <h4>Desarrollo web Full Stacks</h4>
-                <h5>2021 - 2023</h5>
-                <div class="row">
-                    <img  src="../../assets/img/arg-programa.png" alt="codoAcodo" class="col-2 p-1">
-                    <p class="col-10 m-0 p-0 align-self-center"><b><em>Argentina Programa #YoProgramo</em></b></p>
-                </div>
-                <p class="m-1">Angular &amp; Java</p>
-                <a href="https://www.argentina.gob.ar/produccion/argentina-programa/segunda-etapa">
-                    https://www.argentina.gob.ar/produccion/argentina-programa/segunda-etapa
-                </a>
-              </div>
-              <div class="resume-item">
-                <h4>Desarrollo web Full Stacks</h4>
-                <h5>07/2022 - 12/2022</h5>
-                <div class="row">
-                    <img  src="../../assets/img/codoAcodo.png" alt="codoAcodo" class="col-2 p-1">
-                    <p class="col-10 m-0 p-0  align-self-center"><b><em>Codo a Codo - Ciudad de Buenos Aires</em></b></p>
-                </div>
-                <p class="m-1">VUE.JS &amp; Python</p>
-                <ul>
-                    <li>Vue.js</li>
-                    <li>Git</li>
-                    <li>SCRUM</li>
-                    <li>MySQL</li>
-                    <li>Python</li>
-                    <li>Django</li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-lg-6" hidden>
-              <h3 class="resume-title">Experiencia Laboral</h3>
-              <div class="resume-item">
-                <h4>Una experiencia</h4>
-                <h5>2019 - Present</h5>
-                <p><em>Experion, New York, NY </em></p>
-                <ul>
-                  <li>Lead in the design, development, and implementation of the graphic, layout, and production communication materials</li>
-                  <li>Delegate tasks to the 7 members of the design team and provide counsel on all aspects of the project. </li>
-                  <li>Supervise the assessment of all graphic materials in order to ensure quality and accuracy of the design</li>
-                  <li>Oversee the efficient use of production project budgets ranging from $2,000 - $25,000</li>
-                </ul>
-              </div>
-              <div class="resume-item">
-                <h4>Otra experiencia</h4>
-                <h5>2017 - 2018</h5>
-                <p><em>Stepping Stone Advertising, New York, NY</em></p>
-                <ul>
-                  <li>Developed numerous marketing programs (logos, brochures,infographics, presentations, and advertisements).</li>
-                  <li>Managed up to 5 projects or tasks at a given time while under pressure</li>
-                  <li>Recommended and consulted with clients on the most appropriate graphic design</li>
-                  <li>Created 4+ design presentations and proposals a month for clients and account managers</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-  
         </div>
-      </section><!-- End Resume Section -->
+        <div class="d-flex flex-row">
+          <button class="rounded-circle btn btn-success" *ngIf="edition">+</button>
+
+          <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+            Launch demo modal
+          </button>
+          
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered index" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+        </div>
+      </div>
+      <div class="col-lg-6" hidden>
+        <h3 class="resume-title">Experiencia Laboral</h3>
+        <div class="resume-item">
+          <h4>Una experiencia</h4>
+          <h5>2019 - Present</h5>
+          <p><em>Experion, New York, NY </em></p>
+          <ul>
+            <li>Lead in the design, development, and implementation of the graphic, layout, and production communication materials</li>
+            <li>Delegate tasks to the 7 members of the design team and provide counsel on all aspects of the project. </li>
+            <li>Supervise the assessment of all graphic materials in order to ensure quality and accuracy of the design</li>
+            <li>Oversee the efficient use of production project budgets ranging from $2,000 - $25,000</li>
+          </ul>
+        </div>
+        <div class="resume-item">
+          <h4>Otra experiencia</h4>
+          <h5>2017 - 2018</h5>
+          <p><em>Stepping Stone Advertising, New York, NY</em></p>
+          <ul>
+            <li>Developed numerous marketing programs (logos, brochures,infographics, presentations, and advertisements).</li>
+            <li>Managed up to 5 projects or tasks at a given time while under pressure</li>
+            <li>Recommended and consulted with clients on the most appropriate graphic design</li>
+            <li>Created 4+ design presentations and proposals a month for clients and account managers</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div routerLinkActive="visually-hidden" [routerLinkActiveOptions]="{exact: true}">
+              <form class="php-email-form" #updateForm="ngForm">
+              </form>
+        <div class="d-flex justify-content-center">
+          <div class="m-3"><button class="btn btn-danger" (click)="reset()">Resetear Cambios</button></div>
+          <div class="m-3"><a class="btn btn-success" routerLink="/" (click)="saveChanges()">Guardar cambios y volver</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- End Resume Section -->

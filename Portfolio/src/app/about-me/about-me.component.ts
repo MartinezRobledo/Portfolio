@@ -39,11 +39,6 @@ export class AboutMeComponent implements OnInit {
   changeField(event:any){
     this.adrian[event.target.name] = "";
     this.adrian[event.target.name] += event.target.value;
-
-    if(event.target.name == 'birthdate')
-      if(event.target.value != "")
-        this.edad = this.CalculateAge();
-    console.log(this.dataService.persona.birthplace)
   }
 
   restoreData(){

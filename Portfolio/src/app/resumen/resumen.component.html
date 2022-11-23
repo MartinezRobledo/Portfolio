@@ -74,7 +74,7 @@
   </div>
 </section><!-- End Resume Section -->
 <app-modal #modal [title]="'NUEVA FORMACIÓN'">
-  <form class="php-email-form" #resumeForm="ngForm" (ngSubmit)="onSubmit(resumeForm)">
+  <form class="php-email-form" #resumeForm="ngForm" (ngSubmit)="onSubmit(resumeForm); modal.hideModal()">
     <div class="form-group mb-3">
       <label for="degree">Carrera o Curso:</label>
       <input type="text" name="degree" class="form-control" id="degree" placeholder="Título" required ngModel>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Education } from '../Models/Educacion';
 import { DataService } from '../services/data.service';
+import { ModalComponent } from '../shared/modal/modal.component';
 
 @Component({
   selector: 'app-resumen',
@@ -26,7 +27,6 @@ export class ResumenComponent implements OnInit {
 
   validateEdition(){
     this.dataService.edition = !this.dataService.edition;
-    console.log(this.dataService.edition)
   }
 
   eliminarElemento(i:number){
@@ -45,13 +45,14 @@ export class ResumenComponent implements OnInit {
 
   onSubmit(form:any){
     let newFormation = {
-      degree: form.degree,
-      rangeTime: form.since + form.until,
-      institution: form.institution,
-      syllabus: form.syllabus,
-      linkToSyllabus: form.linkToSyllabus,
-      icon: ''
+      degree: form.value.degree,
+      rangeTime: form.value.since + ' - ' + form.value.until,
+      institution: form.value.institution,
+      syllabus: form.value.syllabus,
+      linkToSyllabus: form.value.linkToSyllabus,
+      icon: form.value.icon
     }
     this.formation.push(newFormation);
+    form.reset();
   }
 }

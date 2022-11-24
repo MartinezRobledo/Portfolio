@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Education } from '../Models/Educacion';
 import { DataService } from '../services/data.service';
-import { ModalComponent } from '../shared/modal/modal.component';
 
 @Component({
   selector: 'app-resumen',

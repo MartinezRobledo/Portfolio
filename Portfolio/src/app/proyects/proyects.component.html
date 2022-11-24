@@ -29,7 +29,7 @@
               <h4>{{proyect.title}}</h4>
               <p>{{proyect.type}}</p>
               <div class="portfolio-links">
-                <a [href]="" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Expandir imagen"><i class="bx bx-plus"></i></a>
+                <a class="portfolio-lightbox" data-gallery="portfolioGallery" title="Expandir imagen" (click)="modal.showModal(); setDataModal(proyect.linkProyect, proyect.title)" style="cursor: pointer;"><i class="bx bx-plus"></i></a>
                 <a [href]="proyect.linkProyect" class="portfolio-details-lightbox" data-glightbox="type: external" [title]="proyect.title" target="_blank"><i class="bx bx-link"></i></a>
               </div>
             </div>
@@ -40,3 +40,7 @@
 
     </div>
   </section><!-- End Portfolio Section -->
+  <app-modal #modal [title]="proyectName">
+    <iframe class="modalframe" [src]="proyectLink | safe"></iframe>
+  </app-modal>
+

@@ -10,6 +10,8 @@ import { DataService } from '../services/data.service';
 export class ProyectsComponent implements OnInit {
 
   proyects:Proyects[] = [];
+  proyectLink:string;
+  proyectName:string;
 
   constructor(private dataService:DataService) {
     this.proyects = this.dataService.proyects.slice();
@@ -23,6 +25,11 @@ export class ProyectsComponent implements OnInit {
       return `https://www.muylinux.com/wp-content/uploads/2017/06/github.png`;
     }
     return this.proyects[i].linkProyect;
+  }
+
+  setDataModal(link:string, name:string){
+    this.proyectLink = link;
+    this.proyectName = name;
   }
 
 }

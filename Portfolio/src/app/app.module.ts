@@ -18,6 +18,7 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { DataService } from './services/data.service';
 import { ModalComponent } from './shared/modal/modal.component';
+import { SafePipe } from './safe.pipe';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { ModalComponent } from './shared/modal/modal.component';
     HomeComponent,
     HeaderComponent,
     ModalComponent,
+    SafePipe,
   ],
   imports: [
     BrowserModule,

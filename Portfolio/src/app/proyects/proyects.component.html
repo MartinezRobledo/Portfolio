@@ -19,14 +19,17 @@
 
       <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
-        <div *ngFor="let proyect of proyects" class="col-lg-4 col-md-6 portfolio-item" [ngClass]="proyect.class">
+        <div *ngFor="let proyect of proyects; let i=index" class="col-lg-4 col-md-6 portfolio-item" [ngClass]="proyect.class">
           <div class="portfolio-wrap">
-            <img [src]="proyect.linkThumb" class="img-fluid" alt="">
+            <!-- <img [src]="proyect.linkThumb" class="img-fluid" alt=""> -->
+            <div class="embed-responsive embed-responsive-21by9">
+              <iframe class="embed-responsive-item" [src]="getUrl(i) | safe" scrolling="no"></iframe>
+            </div>
             <div class="portfolio-info">
               <h4>{{proyect.title}}</h4>
               <p>{{proyect.type}}</p>
               <div class="portfolio-links">
-                <a [href]="proyect.linkThumb" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Expandir imagen"><i class="bx bx-plus"></i></a>
+                <a [href]="" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Expandir imagen"><i class="bx bx-plus"></i></a>
                 <a [href]="proyect.linkProyect" class="portfolio-details-lightbox" data-glightbox="type: external" [title]="proyect.title" target="_blank"><i class="bx bx-link"></i></a>
               </div>
             </div>

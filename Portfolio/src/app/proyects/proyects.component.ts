@@ -5,7 +5,7 @@ import { DataService } from '../services/data.service';
 @Component({
   selector: 'app-proyects',
   templateUrl: './proyects.component.html',
-  styleUrls: ['./proyects.component.sass']
+  styleUrls: ['./proyects.component.scss']
 })
 export class ProyectsComponent implements OnInit {
 
@@ -16,6 +16,13 @@ export class ProyectsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  getUrl(i:number){
+    if(this.proyects[i].linkProyect.includes('github')){
+      return `https://www.muylinux.com/wp-content/uploads/2017/06/github.png`;
+    }
+    return this.proyects[i].linkProyect;
   }
 
 }

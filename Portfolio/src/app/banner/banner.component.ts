@@ -1,5 +1,4 @@
-// @ts-nocheck
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import Typewriter from 't-writer.js'
 import { Persona } from '../Models/Persona';
 import { DataService } from '../services/data.service';

@@ -53,7 +53,7 @@
           <div class="col m-3">
             <div class="row form-group">
               <label for="birthdate" class="mb-1">Fecha de Nacimiento:</label>
-              <input type="date" name="birthdate" class="form-control mb-2" id="birthdate" [(ngModel)]="adrian.birthdate">
+              <input type="date" name="birthdate" class="form-control mb-2" id="birthdate" [(ngModel)]="adrian.birthdate" (change)="SendDataonChange($event)">
             </div>
             <div class="row form-group mt-3 mt-md-0">
               <label for="birthplace" class="mb-1">Lugar de Nacimiento:</label>

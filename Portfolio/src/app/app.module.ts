@@ -42,7 +42,7 @@ import { SafePipe } from './safe.pipe';
     NgbModule,
     InViewportModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

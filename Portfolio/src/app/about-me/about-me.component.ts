@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { Persona } from '../Models/Persona';
 import { DataService } from '../services/data.service';
 
@@ -14,16 +15,17 @@ export class AboutMeComponent implements OnInit {
   edit:boolean;
   edad:number;
   updateForm:FormGroup;
+  fecha = '2015-05-02'
 
   constructor(private dataService:DataService) { 
     this.adrian = Object.assign({}, this.dataService.persona);
     this.edit = this.dataService.login;
-    this.edad = this.CalculateAge();
+    this.edad = this.CalculateAge(this.adrian.birthdate);
   }
 
-  CalculateAge(): number {
+  CalculateAge(birthdate:string): number {
     const today: Date = new Date();
-    const birthDate: Date = new Date(this.adrian.birthdate);
+    const birthDate: Date = new Date(birthdate);
     let age: number = today.getFullYear() - birthDate.getFullYear();
     const month: number = today.getMonth() - birthDate.getMonth();
 
@@ -39,6 +41,10 @@ export class AboutMeComponent implements OnInit {
   changeField(event:any){
     this.adrian[event.target.name] = "";
     this.adrian[event.target.name] += event.target.value;
+  }
+
+  SendDataonChange(event: any) {
+    this.edad = this.CalculateAge(event.target.value);
   }
 
   restoreData(){

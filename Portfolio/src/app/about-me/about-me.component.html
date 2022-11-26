@@ -48,44 +48,54 @@
       </div>
     </div>
     <div routerLinkActive="visually-hidden" [routerLinkActiveOptions]="{exact: true}">
-      <form class="form-group">
+      <form class="form-group" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
         <div class="row">
           <div class="col m-3">
             <div class="row form-group">
               <label for="birthdate" class="mb-1">Fecha de Nacimiento:</label>
-              <input type="date" name="birthdate" class="form-control mb-2" id="birthdate" [(ngModel)]="adrian.birthdate" (change)="SendDataonChange($event)">
+              <input type="date" name="birthdate" class="form-control mb-2" id="birthdate" 
+                (change)="SendDataonChange($event)" formControlName="birthdate" (keyup)="changeField($event)">
+                <div class="alert alert-danger" role="alert" *ngIf="formGroup.get('birthdate').touched && formGroup.get('birthdate').errors">{{getError('birthdate')}}</div>
             </div>
             <div class="row form-group mt-3 mt-md-0">
               <label for="birthplace" class="mb-1">Lugar de Nacimiento:</label>
-              <input type="text" class="form-control mb-2" name="birthplace" id="birthplace" placeholder="{{adrian.birthplace}}" (keyup)="changeField($event)">
+              <input type="text" class="form-control mb-2" name="birthplace" id="birthplace" (keyup)="changeField($event)" formControlName="birthplace">
+              <div class="alert alert-danger" role="alert" *ngIf="formGroup.get('birthplace').touched && formGroup.get('birthplace').errors">{{getError('birthplace')}}</div>
             </div>
             <div class="row">
               <label for="phone" class="mb-1">Celular:</label>
-              <input type="number" class="form-control mb-2" name="phone" id="phone" placeholder="{{adrian.phone}}" (keyup)="changeField($event)">
+              <input type="text" class="form-control mb-2" name="phone" id="phone" 
+              (keyup)="changeField($event)" formControlName="phone">
+              <div class="alert alert-danger" role="alert" *ngIf="formGroup.get('phone').touched && formGroup.get('phone').errors">{{getError('phone')}}</div>
             </div>
             <div class="row">
               <label for="location" class="mb-1">Ciudad:</label>
-              <input type="text" class="form-control" name="location" id="location" placeholder="{{adrian.location}}" (keyup)="changeField($event)">
+              <input type="text" class="form-control" name="location" id="location" (keyup)="changeField($event)" formControlName="location">
+              <div class="alert alert-danger" role="alert" *ngIf="formGroup.get('location').touched && formGroup.get('location').errors">{{getError('location')}}</div>
             </div>
           </div>
           <div class="col m-3">
             <div class="row form-group mt-3 mt-md-0">
               <label for="level" class="mb-1">Nivel de Estudios:</label>
-              <input type="text" class="form-control mb-2" name="level" id="level" placeholder="{{adrian.level}}" (keyup)="changeField($event)">
+              <input type="text" class="form-control mb-2" name="level" id="level" (keyup)="changeField($event)" formControlName="level">
+              <div class="alert alert-danger" role="alert" *ngIf="formGroup.get('level').touched && formGroup.get('level').errors">{{getError('level')}}</div>
             </div>
             <div class="row">
               <label for="email" class="mb-1">Email:</label>
-              <input type="email" class="form-control mb-2" name="email" id="email" placeholder="{{adrian.email}}" (keyup)="changeField($event)">
+              <input type="email" class="form-control mb-2" name="email" id="email" (keyup)="changeField($event)" formControlName="email">
+              <div class="alert alert-danger" role="alert" *ngIf="formGroup.get('email').touched && formGroup.get('email').errors">{{getError('email')}}</div>
             </div>
             <div class="row">
               <label for="ocupation" class="mb-1">Ocupación actual:</label>
-              <input type="text" class="form-control mb-2" name="ocupation" id="ocupation" placeholder="{{adrian.ocupation}}" (keyup)="changeField($event)">
+              <input type="text" class="form-control mb-2" name="ocupation" id="ocupation" (keyup)="changeField($event)" formControlName="ocupation">
+              <div class="alert alert-danger" role="alert" *ngIf="formGroup.get('ocupation').touched && formGroup.get('ocupation').errors">{{getError('ocupation')}}</div>
             </div>
           </div>
         </div>
         <div class="d-flex justify-content-center">
-          <div class="m-3"><button type="reset" class="btn btn-primary" (click)="restoreData()">Limpiar</button></div>
-          <div class="m-3"><a class="btn btn-success" routerLink="/" (click)="saveChanges()">Guardar cambios y volver</a></div>
+          <div class="m-3"><button type="button" class="btn btn-danger" routerLink="/" (click)="restoreData()">Cancelar</button></div>
+          <div class="m-3"><button type="reset" class="btn btn-primary">Limpiar</button></div>
+          <div class="m-3"><button type="button" class="btn btn-success" routerLink="/" (click)="onSubmit()" [disabled]="formGroup.invalid">Guardar cambios y volver</button></div>
         </div>
       </form>
     </div>

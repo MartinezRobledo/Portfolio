@@ -21,7 +21,7 @@
           <button class="rounded-circle btn btn-danger p-2 btn-close m-close" (click)="eliminarElemento(i)" *ngIf="edition"></button>
           <div class="resume-item p-4">
             <h4>{{education.degree}}</h4>
-            <h5>{{education.rangeTime}}</h5>
+            <h5>{{education.since}}-{{education.until}}</h5>
             <div class="d-flex flex-row p-1 m-1">
                 <div><img  [src]="education.icon" [alt]="education.institution" width="50" height="50"></div>
                 <div><p class="col-11 m-0 p-2 align-self-center"><b><em>{{education.institution}}</em></b></p></div>
@@ -74,37 +74,44 @@
   </div>
 </section><!-- End Resume Section -->
 <app-modal #modal [title]="'NUEVA FORMACIÓN'">
-  <form class="php-email-form" #resumeForm="ngForm" (ngSubmit)="onSubmit(resumeForm); modal.hideModal()">
+  <form class="php-email-form" [formGroup]="resumeForm" (ngSubmit)="onSubmit(); modal.hideModal()">
     <div class="form-group mb-3">
       <label for="degree">Carrera o Curso:</label>
-      <input type="text" name="degree" class="form-control" id="degree" placeholder="Título" required ngModel>
+      <input type="text" name="degree" class="form-control" id="degree" placeholder="Título" formControlName="degree">
+      <div class="alert alert-danger" role="alert" *ngIf="resumeForm.get('degree').touched && resumeForm.get('degree').errors">{{getError('degree')}}</div>
     </div>
     <div class="row">
       <div class="col-md-6 form-group">
         <label for="since">Desde:</label>
-        <input type="text" name="since" class="form-control" id="since" placeholder="Año de inicio" required ngModel>
+        <input type="text" name="since" class="form-control" id="since" placeholder="Año de inicio" formControlName="since">
+        <div class="alert alert-danger" role="alert" *ngIf="resumeForm.get('since').touched && resumeForm.get('since').errors">{{getError('since')}}</div>
       </div>
       <div class="col-md-6 form-group">
         <label for="until">Hasta:</label>
-        <input type="text" name="until" class="form-control" id="until" placeholder="Año de finalización" required ngModel>
+        <input type="text" name="until" class="form-control" id="until" placeholder="Año de finalización" formControlName="until">
+        <div class="alert alert-danger" role="alert" *ngIf="resumeForm.get('until').touched && resumeForm.get('until').errors">{{getError('until')}}</div>
       </div>
     </div>
     <div class="form-group mt-3">
       <label for="institution">Institución académica:</label>
-      <input type="text" class="form-control" name="institution" id="institution" placeholder="Institución" required ngModel>
+      <input type="text" class="form-control" name="institution" id="institution" placeholder="Institución" formControlName="institution">
+      <div class="alert alert-danger" role="alert" *ngIf="resumeForm.get('institution').touched && resumeForm.get('institution').errors">{{getError('institution')}}</div>
     </div>
     <div class="form-group mt-3">
       <label for="syllabus">Plan: (o temas vistos)</label>
-      <input type="text" class="form-control" name="syllabus" id="syllabus" placeholder="Plan de Estudios" required ngModel>
+      <input type="text" class="form-control" name="syllabus" id="syllabus" placeholder="Plan de Estudios" formControlName="syllabus">
+      <div class="alert alert-danger" role="alert" *ngIf="resumeForm.get('syllabus').touched && resumeForm.get('syllabus').errors">{{getError('syllabus')}}</div>
     </div>
     <div class="form-group mt-3 mb-3">
       <label for="linkToSyllabus">Link al temario: (opcional)</label>
-      <input type="text" class="form-control" name="linkToSyllabus" id="linkToSyllabus" placeholder="Link al plan de estudios" ngModel>
+      <input type="text" class="form-control" name="linkToSyllabus" id="linkToSyllabus" placeholder="Link al plan de estudios" formControlName="linkToSyllabus">
+      <div class="alert alert-danger" role="alert" *ngIf="resumeForm.get('linkToSyllabus').touched && resumeForm.get('linkToSyllabus').errors">{{getError('linkToSyllabus')}}</div>
     </div>
     <div class="form-group mt-3 mb-3">
       <label for="linkToSyllabus">Link al Icono: (opcional)</label>
-      <input type="text" class="form-control" name="icon" id="icon" placeholder="Link al icono" ngModel>
+      <input type="text" class="form-control" name="icon" id="icon" placeholder="Link al icono" formControlName="icon">
+      <div class="alert alert-danger" role="alert" *ngIf="resumeForm.get('icon').touched && resumeForm.get('icon').errors">{{getError('icon')}}</div>
     </div>
-    <div class="text-center"><button type="submit" class="btn btn-primary">Añadir</button></div>
+    <div class="text-center"><button type="submit" class="btn btn-primary" [disabled]="resumeForm.invalid">Añadir</button></div>
   </form>
 </app-modal>

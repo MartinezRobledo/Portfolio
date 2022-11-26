@@ -33,7 +33,8 @@ export class DataService {
   formation:Education[] = [
     {
       degree: 'Ingeniería Informática',
-      rangeTime: '2017 - actual',
+      since: '2017',
+      until: 'actual',
       institution: 'Universidad Nacional de La Matanza, Buenos Aires, Argentina',
       syllabus: 'Plan de estudios',
       linkToSyllabus: 'https://ingenieria.unlam.edu.ar/index.php?seccion=3&idArticulo=30',
@@ -41,7 +42,8 @@ export class DataService {
     },
     {
       degree: 'Desarrollador Web Full Stacks',
-      rangeTime: '2022 - actual',
+      since: '07/2022',
+      until: 'actual',
       institution: 'Argentina Programa',
       syllabus: 'Plan de estudios Angular & Java',
       linkToSyllabus: 'https://www.argentina.gob.ar/produccion/argentina-programa/segunda-etapa',
@@ -49,13 +51,18 @@ export class DataService {
     },
     {
       degree: 'Desarrollador Web Full Stacks',
-      rangeTime: '07/2022 - 12/2022',
+      since: '07/2022',
+      until: '12/2022',
       institution: 'Codo a Codo - Ciudad de Buenos Aires',
       syllabus: 'Plan de estudios VUE.js & Python',
       linkToSyllabus: '',
       icon: '../../assets/img/codoAcodo.png',
     },
   ];
+
+  updateFormation(formation:Education[]){
+    this.formation = Object.assign({}, formation)
+  }
 
   edition:boolean = false;
 

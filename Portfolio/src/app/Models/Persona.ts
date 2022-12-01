@@ -2,25 +2,25 @@ export class Persona{
     name:string;
     lastname:string;
     birthdate:string;
-    location:string;
+    address:string;
     birthplace:string;
     phone:number;
-    level:string;
+    studyLevel:string;
     email:string;
     ocupation:string;
-    titulo:string[];
+    degree:string[];
 
-    constructor(name:string,lastname:string,birthdate:string,location:string,birthplace:string,phone:number,
-                level:string,email:string,ocupation:string,titulo:string[]){
+    constructor(name:string,lastname:string,birthdate:string,address:string,birthplace:string,phone:number,
+                studyLevel:string,email:string,ocupation:string,degree:string[]){
         this.name = name;
         this.lastname = lastname;
         this.birthdate = birthdate;
-        this.location = location;
+        this.address = address;
         this.birthplace = birthplace;
         this.phone = phone;
-        this.level = level;
+        this.studyLevel = studyLevel;
         this.email = email;
         this.ocupation = ocupation;
-        this.titulo = titulo;
+        this.degree = degree;
     }
 }

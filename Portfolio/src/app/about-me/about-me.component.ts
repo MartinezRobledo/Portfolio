@@ -45,13 +45,13 @@ export class AboutMeComponent implements OnInit {
       email: [this.adrian.email, [Validators.email, Validators.required]],
       birthplace: [this.adrian.birthplace, [Validators.minLength(3), Validators.maxLength(100), Validators.required]],
       birthdate: [this.adrian.birthdate],
-      location: [this.adrian.location, [Validators.minLength(3), Validators.maxLength(100), Validators.required]],
-      level: [this.adrian.level, [Validators.minLength(3), Validators.maxLength(20), Validators.required]],
+      location: [this.adrian.address, [Validators.minLength(3), Validators.maxLength(100), Validators.required]],
+      level: [this.adrian.studyLevel, [Validators.minLength(3), Validators.maxLength(20), Validators.required]],
       ocupation: [this.adrian.ocupation, [Validators.minLength(3), Validators.maxLength(30), Validators.required]],
       phone: [this.adrian.phone, [Validators.maxLength(10), Validators.minLength(10), Validators.required]],
       name: [this.adrian.name],
       lastname: [this.adrian.lastname],
-      titulo: [this.adrian.titulo]
+      titulo: [this.adrian.degree]
     });
   }
 

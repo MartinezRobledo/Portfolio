@@ -5,7 +5,6 @@ import { InViewportModule } from 'ng-in-viewport';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatNativeDateModule} from '@angular/material/core';
 //Componentes
 import { AppComponent } from './app.component';
 import { BannerComponent } from './banner/banner.component';
@@ -20,7 +19,6 @@ import { HeaderComponent } from './header/header.component';
 import { DataService } from './services/data.service';
 import { ModalComponent } from './shared/modal/modal.component';
 import { SafePipe } from './safe.pipe';
-import { MaterialExampleModule } from 'src/material.module';
 
 
 @NgModule({
@@ -45,8 +43,6 @@ import { MaterialExampleModule } from 'src/material.module';
     InViewportModule,
     FormsModule,
     ReactiveFormsModule,
-    MatNativeDateModule,
-    MaterialExampleModule,
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

@@ -23,7 +23,8 @@ export class DataService {
     'Universitario',
     'adrianfmart@gmail.com',
     'Freelance',
-    ['Desarrollador Full Stacks Jr.', 'Estudiante de Ingeniería'] 
+    ['Desarrollador Full Stacks Jr.', 'Estudiante de Ingeniería'],
+    '../../assets/img/selfi.png'
   );
 
   updatePersona(persona:Persona){
@@ -38,7 +39,7 @@ export class DataService {
       institution: 'Universidad Nacional de La Matanza, Buenos Aires, Argentina',
       syllabus: 'Plan de estudios',
       linkToSyllabus: 'https://ingenieria.unlam.edu.ar/index.php?seccion=3&idArticulo=30',
-      icon: '../../assets/img/unlamlogo.png',
+      logo: '../../assets/img/unlamlogo.png',
     },
     {
       degree: 'Desarrollador Web Full Stacks',
@@ -47,7 +48,7 @@ export class DataService {
       institution: 'Argentina Programa',
       syllabus: 'Plan de estudios Angular & Java',
       linkToSyllabus: 'https://www.argentina.gob.ar/produccion/argentina-programa/segunda-etapa',
-      icon: '../../assets/img/arg-programa.png',
+      logo: '../../assets/img/arg-programa.png',
     },
     {
       degree: 'Desarrollador Web Full Stacks',
@@ -56,7 +57,7 @@ export class DataService {
       institution: 'Codo a Codo - Ciudad de Buenos Aires',
       syllabus: 'Plan de estudios VUE.js & Python',
       linkToSyllabus: '',
-      icon: '../../assets/img/codoAcodo.png',
+      logo: '../../assets/img/codoAcodo.png',
     },
   ];
 
@@ -67,16 +68,16 @@ export class DataService {
   edition:boolean = false;
 
   skills:Habilidad[] = [
-    {name: 'HTML', value: 90, type:'success'},
-    {name: 'CSS', value: 80, type:'success'},
-    {name: 'JavaScript', value: 75, type:'success'},
-    {name: 'TypeScript', value: 70, type:'success'},
-    {name: 'Angular', value: 65, type:'primary'},
-    {name: 'VUE', value: 40, type:'primary'},
-    {name: 'MySQL', value: 55, type:'primary'},
-    {name: 'C/C++', value: 95, type:'success'},
-    {name: 'Python', value: 30, type:'danger'},
-    {name: 'Java', value: 25, type:'danger'},
+    {name: 'HTML', value: 90},
+    {name: 'CSS', value: 80},
+    {name: 'JavaScript', value: 75},
+    {name: 'TypeScript', value: 70},
+    {name: 'Angular', value: 65},
+    {name: 'VUE', value: 40},
+    {name: 'MySQL', value: 55},
+    {name: 'C/C++', value: 95},
+    {name: 'Python', value: 30},
+    {name: 'Java', value: 35},
   ]
 
   addSkill(skill:Habilidad){

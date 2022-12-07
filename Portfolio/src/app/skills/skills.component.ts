@@ -10,7 +10,6 @@ import { DataService } from '../services/data.service';
 })
 
 export class SkillsComponent implements OnInit {
-  @Input() mostrar:boolean;
 
   skills:Habilidad[] = []
   edit:boolean;
@@ -63,7 +62,6 @@ export class SkillsComponent implements OnInit {
   }
 
   actualizarElemento(i:number,value:number){
-    this.skills[Math.trunc(i)].type = this.validarType(value);
     this.dataService.updateSkill(i, this.skills[i]);
   }
 

@@ -46,14 +46,14 @@
             </div>
           </div>
           <div class="form-group mt-3">
-            <input type="text" class="form-control" name="subject" id="subject" placeholder="Asunto" formArrayName="subject">
+            <input type="text" class="form-control" name="subject" id="subject" placeholder="Asunto" formControlName="subject">
             <div class="alert alert-danger" role="alert" *ngIf="contactForm.get('subject').touched && contactForm.get('subject').errors">{{getError('subject')}}</div>
           </div>
           <div class="form-group mt-3">
             <textarea class="form-control" name="message" rows="5" placeholder="Mensaje" formControlName="message"></textarea>
             <div class="alert alert-danger" role="alert" *ngIf="contactForm.get('message').touched && contactForm.get('message').errors">{{getError('message')}}</div>
           </div>
-          <div class="text-center"><button type="submit" [disabled]="!contactForm.valid">Enviar Mensaje {{contactForm.valid}}</button></div>
+          <div class="text-center"><button type="submit" [disabled]="contactForm.invalid">Enviar Mensaje {{contactForm.valid}}</button></div>
         </form>
 
       </div>

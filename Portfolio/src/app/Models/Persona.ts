@@ -9,9 +9,10 @@ export class Persona{
     email:string;
     ocupation:string;
     degree:string[];
+    urlphoto:string;
 
     constructor(name:string,lastname:string,birthdate:string,address:string,birthplace:string,phone:number,
-                studyLevel:string,email:string,ocupation:string,degree:string[]){
+                studyLevel:string,email:string,ocupation:string,degree:string[],urlphoto:string){
         this.name = name;
         this.lastname = lastname;
         this.birthdate = birthdate;
@@ -22,5 +23,6 @@ export class Persona{
         this.email = email;
         this.ocupation = ocupation;
         this.degree = degree;
+        this.urlphoto = urlphoto;
     }
 }

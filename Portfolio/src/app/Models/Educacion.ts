@@ -5,5 +5,5 @@ export class Education{
     institution:string;
     syllabus:string;
     linkToSyllabus:string;
-    icon:string;
+    logo:string;
 }

@@ -23,7 +23,7 @@
             <h4>{{education.degree}}</h4>
             <h5>{{education.since}}-{{education.until}}</h5>
             <div class="d-flex flex-row p-1 m-1">
-                <div><img  [src]="education.icon" [alt]="education.institution" width="50" height="50"></div>
+                <div><img  [src]="education.logo" [alt]="education.institution" width="50" height="50"></div>
                 <div><p class="col-11 m-0 p-2 align-self-center"><b><em>{{education.institution}}</em></b></p></div>
             </div>
             <p class="mb-0">{{education.syllabus}}</p>
@@ -35,28 +35,17 @@
           <button class="rounded-circle btn btn-success" *ngIf="edition" (click)="modal.showModal()">+</button>
         </div>
       </div>
-      <div class="col-lg-6" hidden>
+      <div class="col-lg-6">
         <h3 class="resume-title">Experiencia Laboral</h3>
         <div class="resume-item">
-          <h4>Una experiencia</h4>
-          <h5>2019 - Present</h5>
-          <p><em>Experion, New York, NY </em></p>
+          <h4>Freelance</h4>
+          <h5>Present</h5>
+          <p><em>Página Web para consultorio de Ortodoncia</em></p>
           <ul>
-            <li>Lead in the design, development, and implementation of the graphic, layout, and production communication materials</li>
-            <li>Delegate tasks to the 7 members of the design team and provide counsel on all aspects of the project. </li>
-            <li>Supervise the assessment of all graphic materials in order to ensure quality and accuracy of the design</li>
-            <li>Oversee the efficient use of production project budgets ranging from $2,000 - $25,000</li>
-          </ul>
-        </div>
-        <div class="resume-item">
-          <h4>Otra experiencia</h4>
-          <h5>2017 - 2018</h5>
-          <p><em>Stepping Stone Advertising, New York, NY</em></p>
-          <ul>
-            <li>Developed numerous marketing programs (logos, brochures,infographics, presentations, and advertisements).</li>
-            <li>Managed up to 5 projects or tasks at a given time while under pressure</li>
-            <li>Recommended and consulted with clients on the most appropriate graphic design</li>
-            <li>Created 4+ design presentations and proposals a month for clients and account managers</li>
+            <li>Frontend en Angular</li>
+            <li>Maquetado en Bootstrap</li>
+            <li>Base de datos en MySQL</li>
+            <li>Backend en Java</li>
           </ul>
         </div>
       </div>
@@ -109,8 +98,8 @@
     </div>
     <div class="form-group mt-3 mb-3">
       <label for="linkToSyllabus">Link al Icono: (opcional)</label>
-      <input type="text" class="form-control" name="icon" id="icon" placeholder="Link al icono" formControlName="icon">
-      <div class="alert alert-danger" role="alert" *ngIf="resumeForm.get('icon').touched && resumeForm.get('icon').errors">{{getError('icon')}}</div>
+      <input type="text" class="form-control" name="logo" id="logo" placeholder="Link al logo" formControlName="logo">
+      <div class="alert alert-danger" role="alert" *ngIf="resumeForm.get('logo').touched && resumeForm.get('logo').errors">{{getError('logo')}}</div>
     </div>
     <div class="text-center"><button type="submit" class="btn btn-primary" [disabled]="resumeForm.invalid">Añadir</button></div>
   </form>

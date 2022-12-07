@@ -21,7 +21,7 @@
               <button class="col-auto rounded-circle btn btn-danger p-2 btn-close" *ngIf="delete" (click)="eliminarElemento(i)"></button>
               <div class="col progress">
                 <span class="skill">{{skill.name}}<i class="val">{{skill.value}}%</i></span>
-                    <p><ngb-progressbar [type]="skill.type" [value]="skill.value"></ngb-progressbar></p>
+                    <p><ngb-progressbar [type]="validarType(skill.value)" [value]="skill.value"></ngb-progressbar></p>
               </div>
               <input *ngIf="update" type="range" class="form-range p-2" min="0" max="100" [(ngModel)]="skill.value" name="value" (ngModelChange)="actualizarElemento(i,skill.value)">
             </div>
@@ -33,7 +33,7 @@
               <button class="col-auto rounded-circle btn btn-danger p-2 btn-close" *ngIf="delete" (click)="eliminarElemento(((skills.length)/2)+i)"></button>
               <div class="col progress">
                 <span class="skill">{{skill.name}}<i class="val">{{skill.value}}%</i></span>
-                <p><ngb-progressbar [type]="skill.type" [value]="skill.value"></ngb-progressbar></p>
+                <p><ngb-progressbar [type]="validarType(skill.value)" [value]="skill.value"></ngb-progressbar></p>
               </div>
               <input *ngIf="update" type="range" class="form-range p-2" min="0" max="100" [(ngModel)]="skill.value" name="value" (ngModelChange)="actualizarElemento(((skills.length)/2)+i,skill.value)">
             </div>

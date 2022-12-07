@@ -36,7 +36,7 @@ export class ResumenComponent implements OnInit {
       institution: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       syllabus: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]],
       linkToSyllabus: ['', Validators.maxLength(200)],
-      icon: ['', Validators.maxLength(200)],
+      logo: ['', Validators.maxLength(200)],
     })
   }
 

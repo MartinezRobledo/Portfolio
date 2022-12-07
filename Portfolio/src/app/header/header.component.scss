@@ -1,0 +1,29 @@
+.login{
+    position: absolute;
+    width: 100%;
+    display: none;
+    align-items: center;
+    justify-content: end;
+    top: 5px;
+    right: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.login p{
+    font-size: 1rem;
+    padding: 0;
+    margin: 0px 2px;
+}
+
+.active{
+    display: flex;
+}
+
+@media (max-width: 768px){
+    .login{
+        justify-content: flex-start;
+        margin-left: 5px;
+    }
+}

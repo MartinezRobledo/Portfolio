@@ -11,8 +11,6 @@ export class DataService {
 
   constructor() { }
 
-  login:boolean = true;
-
   persona:Persona = new Persona(
     'Adrián',
     'Martínez',
@@ -23,12 +21,13 @@ export class DataService {
     'Universitario',
     'adrianfmart@gmail.com',
     'Freelance',
-    ['Desarrollador Full Stacks Jr.', 'Estudiante de Ingeniería'],
+    'Desarrollador Full Stacks Jr.',
     '../../assets/img/selfi.png'
   );
 
   updatePersona(persona:Persona){
-    this.persona = Object.assign({}, persona);
+    // this.persona = Object.assign({}, persona);
+    this.persona = persona;
   }
 
   formation:Education[] = [

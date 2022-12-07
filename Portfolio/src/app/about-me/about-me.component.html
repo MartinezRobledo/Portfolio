@@ -3,7 +3,7 @@
     <div class="section-title">
       <div class="edit-title">
         <h2>Sobre mí</h2>
-        <i routerLink="/about" routerLinkActive='visually-hidden'  class='bi bi-pen-fill edit-icon' *ngIf="edit" heigth="32"></i>
+        <i routerLink="/about" routerLinkActive='visually-hidden'  class='bi bi-pen-fill edit-icon' *ngIf="login$ | async" heigth="32"></i>
       </div>
       <p>Soy una persona muy reflexiva y apasionada por los numeros. 
           Me gustan los retos, busco ponerme objetivos dificiles pero alcanzables. 
@@ -70,15 +70,15 @@
             </div>
             <div class="row">
               <label for="location" class="mb-1">Ciudad:</label>
-              <input type="text" class="form-control" name="location" id="location" (keyup)="changeField($event)" formControlName="location">
-              <div class="alert alert-danger" role="alert" *ngIf="formGroup.get('location').touched && formGroup.get('location').errors">{{getError('location')}}</div>
+              <input type="text" class="form-control" name="address" id="address" (keyup)="changeField($event)" formControlName="address">
+              <div class="alert alert-danger" role="alert" *ngIf="formGroup.get('address').touched && formGroup.get('address').errors">{{getError('address')}}</div>
             </div>
           </div>
           <div class="col m-3">
             <div class="row form-group mt-3 mt-md-0">
               <label for="level" class="mb-1">Nivel de Estudios:</label>
-              <input type="text" class="form-control mb-2" name="level" id="level" (keyup)="changeField($event)" formControlName="level">
-              <div class="alert alert-danger" role="alert" *ngIf="formGroup.get('level').touched && formGroup.get('level').errors">{{getError('level')}}</div>
+              <input type="text" class="form-control mb-2" name="studyLevel" id="studyLevel" (keyup)="changeField($event)" formControlName="studyLevel">
+              <div class="alert alert-danger" role="alert" *ngIf="formGroup.get('studyLevel').touched && formGroup.get('studyLevel').errors">{{getError('studyLevel')}}</div>
             </div>
             <div class="row">
               <label for="email" class="mb-1">Email:</label>

@@ -1,6 +1,7 @@
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { Habilidad } from '../Models/Habilidad';
+import { AuthService } from '../services/auth.service';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -9,21 +10,18 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./skills.component.scss']
 })
 
-export class SkillsComponent implements OnInit {
+export class SkillsComponent {
 
-  skills:Habilidad[] = []
-  edit:boolean;
+  skills:Habilidad[] = [];
+  login$ = this.auth.loggedIn$;
   delete:boolean = false;
   update:boolean = false;
+
   habilitar = {eliminar:'Habilitar', actualizar:'Habilitar'}
 
-  constructor(private dataService:DataService) {
+  constructor(private dataService:DataService, private auth:AuthService) {
     this.skills = this.dataService.skills;
-    this.edit = this.dataService.login
    }
-
-  ngOnInit(): void {
-  }
 
   onSubmit(form:any){
     form.value.type = this.validarType(form.value.value);
@@ -64,5 +62,4 @@ export class SkillsComponent implements OnInit {
   actualizarElemento(i:number,value:number){
     this.dataService.updateSkill(i, this.skills[i]);
   }
-
 }

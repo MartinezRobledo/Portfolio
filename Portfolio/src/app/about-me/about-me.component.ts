@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { Persona } from '../Models/Persona';
+import { AuthService } from '../services/auth.service';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -12,15 +13,14 @@ import { DataService } from '../services/data.service';
 export class AboutMeComponent implements OnInit {
 
   adrian:Persona;
-  edit:boolean;
+  login$ = this.auth.loggedIn$;
   error:boolean = false;
   edad:number;
 
   formGroup:FormGroup;
 
-  constructor(private dataService:DataService, private formBuilder:FormBuilder) { 
+  constructor(private dataService:DataService, private formBuilder:FormBuilder, private auth:AuthService) { 
     this.adrian = Object.assign({}, this.dataService.persona);
-    this.edit = this.dataService.login;
     this.edad = this.CalculateAge(this.adrian.birthdate);
   }
 
@@ -45,13 +45,13 @@ export class AboutMeComponent implements OnInit {
       email: [this.adrian.email, [Validators.email, Validators.required]],
       birthplace: [this.adrian.birthplace, [Validators.minLength(3), Validators.maxLength(100), Validators.required]],
       birthdate: [this.adrian.birthdate],
-      location: [this.adrian.address, [Validators.minLength(3), Validators.maxLength(100), Validators.required]],
-      level: [this.adrian.studyLevel, [Validators.minLength(3), Validators.maxLength(20), Validators.required]],
+      address: [this.adrian.address, [Validators.minLength(3), Validators.maxLength(100), Validators.required]],
+      studyLevel: [this.adrian.studyLevel, [Validators.minLength(3), Validators.maxLength(20), Validators.required]],
       ocupation: [this.adrian.ocupation, [Validators.minLength(3), Validators.maxLength(30), Validators.required]],
       phone: [this.adrian.phone, [Validators.maxLength(10), Validators.minLength(10), Validators.required]],
       name: [this.adrian.name],
       lastname: [this.adrian.lastname],
-      titulo: [this.adrian.degree]
+      degree: [this.adrian.degree]
     });
   }
 
@@ -62,6 +62,7 @@ export class AboutMeComponent implements OnInit {
 
   onSubmit(){
     this.adrian = this.formGroup.value;
+    console.log(this.adrian);
     this.dataService.updatePersona(this.adrian);
   }
 
@@ -107,6 +108,7 @@ export class AboutMeComponent implements OnInit {
 
   SendDataonChange(event: any) {
     this.edad = this.CalculateAge(event.target.value);
+    console.log(event.target.value);
   }
 
   restoreData(){

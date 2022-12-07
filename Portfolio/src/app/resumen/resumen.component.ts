@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Education } from '../Models/Educacion';
+import { AuthService } from '../services/auth.service';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -12,14 +14,13 @@ import { DataService } from '../services/data.service';
 export class ResumenComponent implements OnInit {
 
   formation:Education [] = [];
-  edit:boolean;
+  login$ = this.auth.loggedIn$;
   edition: boolean;
   availForm:boolean = false;
 
   resumeForm:FormGroup;
 
-  constructor(private dataService:DataService, private fb:FormBuilder) { 
-    this.edit = this.dataService.login;
+  constructor(private dataService:DataService, private fb:FormBuilder, private auth:AuthService) { 
     this.edition = this.dataService.edition;
     this.formation = this.dataService.formation.slice()
   }

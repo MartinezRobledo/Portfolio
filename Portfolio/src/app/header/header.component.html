@@ -11,5 +11,14 @@
       </ul>
     </nav><!-- .nav-menu -->
   </header>
+  <div class="login" (click)="login()" [ngClass]="{'active':!(login$ | async)}">
+    <i class="bi bi-box-arrow-in-right"></i>
+    <p>log in</p>
+  </div>
+  <div class="login" (click)="logout()" [ngClass]="{'active':login$ | async}">
+    <i class="bi bi-box-arrow-left"></i>
+    <p>log out</p>
+  </div>
+  <!-- <i class="bi bi-box-arrow-left"></i> -->
   <i class="bi bi-list mobile-nav-toggle d-xl-none d-lg-none" (click)="alternarClase()"></i>
   <!-- End Header -->

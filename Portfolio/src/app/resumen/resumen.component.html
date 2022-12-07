@@ -4,7 +4,7 @@
     <div class="section-title">
       <div class="edit-title">
         <h2>Resumen</h2>
-        <i routerLink="/resumen" routerLinkActive='visually-hidden'  class='bi bi-pen-fill edit-icon' *ngIf="edit" (click)="validateEdition()"></i>
+        <i routerLink="/resumen" routerLinkActive='visually-hidden'  class='bi bi-pen-fill edit-icon' *ngIf="login$ | async" (click)="validateEdition()"></i>
       </div>
       <p>Me recibí de tecnico en Electrónica en la EESTN°1 De Merlo y fue ahi donde hice mi primer contacto 
           con la programacion, la cual luego se convertiría en una de mis mayores pasiones.

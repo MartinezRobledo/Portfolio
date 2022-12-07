@@ -32,14 +32,14 @@ export class BannerComponent implements OnInit{
   })
   
   writer
-    .type('Soy ' + this.persona.degree[0])
+    .type('Soy ' + this.persona.degree)
     .rest(600)
     .changeOps({ deleteSpeed: 80 })
-    .remove(this.persona.degree[0].length)
-    .type(this.persona.degree[1])
+    .remove(this.persona.degree.length)
+    .type(this.persona.degree)
     .rest(600)
     .changeOps({ deleteSpeed: 20 })
-    .remove(this.persona.degree[1].length)
+    .remove(this.persona.degree.length)
     .clear()
     .start()
   }

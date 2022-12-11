@@ -10,7 +10,7 @@ import { Proyects } from '../Models/Proyects';
 export class DataService {
 
   constructor() { }
-
+//about-me component
   persona:Persona = new Persona(
     'Adrián',
     'Martínez',
@@ -29,7 +29,7 @@ export class DataService {
     // this.persona = Object.assign({}, persona);
     this.persona = persona;
   }
-
+//Resumen component
   formation:Education[] = [
     {
       degree: 'Ingeniería Informática',
@@ -65,7 +65,7 @@ export class DataService {
   }
 
   edition:boolean = false;
-
+//skills component
   skills:Habilidad[] = [
     {name: 'HTML', value: 90},
     {name: 'CSS', value: 80},
@@ -90,7 +90,7 @@ export class DataService {
   updateSkill(i:number, skill:Habilidad){
     this.skills[i] = skill;
   }
-
+//proyects component
   proyects:Proyects[] = [
     {
       title: 'Portfolio',

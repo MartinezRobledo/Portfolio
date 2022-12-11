@@ -1,5 +1,6 @@
 
 import { Component} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Habilidad } from '../Models/Habilidad';
 import { AuthService } from '../services/auth.service';
 import { DataService } from '../services/data.service';
@@ -13,20 +14,23 @@ import { DataService } from '../services/data.service';
 export class SkillsComponent {
 
   skills:Habilidad[] = [];
+  newSkill:FormGroup;
   login$ = this.auth.loggedIn$;
   delete:boolean = false;
   update:boolean = false;
 
   habilitar = {eliminar:'Habilitar', actualizar:'Habilitar'}
 
-  constructor(private dataService:DataService, private auth:AuthService) {
+  constructor(private dataService:DataService, private auth:AuthService, private fb:FormBuilder) {
     this.skills = this.dataService.skills;
+    this.newSkill = this.fb.group({
+      name:['', [Validators.required, Validators.minLength(2)]],
+      value:['', [Validators.required, Validators.pattern(/^\d+$/)]]
+    });
    }
 
-  onSubmit(form:any){
-    form.value.type = this.validarType(form.value.value);
-    this.dataService.addSkill(form.value)
-    form.reset();
+  onSubmit(){
+    this.dataService.addSkill(this.newSkill.value);
   }
 
   validarType(value:number): string {

@@ -3,7 +3,13 @@
 <section id="hero" class="d-flex flex-column justify-content-center">
     <div class="container" data-aos="zoom-in" data-aos-delay="100">
         <h1>{{persona.name}} {{persona.lastname}}</h1>
-        <p class="tw"></p>
+        <ngx-typed-js 
+                    [strings]="persona.degree" 
+                    [typeSpeed]="70" [loop]="true" 
+                    [backDelay]="1500" [startDelay]="700" 
+                    [backSpeed]="30">
+             <p>Soy <span class="typing"></span></p>
+          </ngx-typed-js>
         <div class="social-links">
             <a href="https://twitter.com/Madicode" class="twitter" target="_blank"><i class="bx bxl-twitter"></i></a>
             <a href="https://www.facebook.com/adrian.srh.77" class="facebook" target="_blank"><i class="bx bxl-facebook"></i></a>

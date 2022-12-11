@@ -55,8 +55,8 @@
               <form class="php-email-form" #updateForm="ngForm">
               </form>
         <div class="d-flex justify-content-center">
-          <div class="m-3"><button class="btn btn-danger" (click)="reset()">Resetear Cambios</button></div>
-          <div class="m-3"><a class="btn btn-success" routerLink="/" (click)="saveChanges()">Guardar cambios y volver</a></div>
+          <div class="m-3"><button class="bttn bttn-danger" (click)="reset()">Resetear Cambios</button></div>
+          <div class="m-3"><button class="bttn bttn-success" routerLink="" (click)="saveChanges()">Guardar cambios y volver</button></div>
         </div>
       </div>
     </div>
@@ -64,43 +64,43 @@
 </section><!-- End Resume Section -->
 <app-modal #modal [title]="'NUEVA FORMACIÓN'">
   <form class="php-email-form" [formGroup]="resumeForm" (ngSubmit)="onSubmit(); modal.hideModal()">
-    <div class="form-group mb-3">
+    <div class="form-group">
       <label for="degree">Carrera o Curso:</label>
-      <input type="text" name="degree" class="form-control" id="degree" placeholder="Título" formControlName="degree">
-      <div class="alert alert-danger" role="alert" *ngIf="resumeForm.get('degree').touched && resumeForm.get('degree').errors">{{getError('degree')}}</div>
+      <input type="text" name="degree" class="form-ctrl" id="degree" placeholder="Título" formControlName="degree" [ngClass]="{'form-ctrl-error': resumeForm.get('degree').touched && resumeForm.get('degree').errors}">
+      <div class="alert-danger" role="alert" *ngIf="resumeForm.get('degree').touched && resumeForm.get('degree').errors">{{getError('degree')}}</div>
     </div>
     <div class="row">
       <div class="col-md-6 form-group">
         <label for="since">Desde:</label>
-        <input type="text" name="since" class="form-control" id="since" placeholder="Año de inicio" formControlName="since">
-        <div class="alert alert-danger" role="alert" *ngIf="resumeForm.get('since').touched && resumeForm.get('since').errors">{{getError('since')}}</div>
+        <input type="text" name="since" class="form-ctrl" id="since" placeholder="Año de inicio" formControlName="since" [ngClass]="{'form-ctrl-error': resumeForm.get('since').touched && resumeForm.get('since').errors}">
+        <div class="alert-danger" role="alert" *ngIf="resumeForm.get('since').touched && resumeForm.get('since').errors">{{getError('since')}}</div>
       </div>
       <div class="col-md-6 form-group">
         <label for="until">Hasta:</label>
-        <input type="text" name="until" class="form-control" id="until" placeholder="Año de finalización" formControlName="until">
-        <div class="alert alert-danger" role="alert" *ngIf="resumeForm.get('until').touched && resumeForm.get('until').errors">{{getError('until')}}</div>
+        <input type="text" name="until" class="form-ctrl" id="until" placeholder="Año de finalización" formControlName="until" [ngClass]="{'form-ctrl-error': resumeForm.get('until').touched && resumeForm.get('until').errors}">
+        <div class="alert-danger" role="alert" *ngIf="resumeForm.get('until').touched && resumeForm.get('until').errors">{{getError('until')}}</div>
       </div>
     </div>
     <div class="form-group mt-3">
       <label for="institution">Institución académica:</label>
-      <input type="text" class="form-control" name="institution" id="institution" placeholder="Institución" formControlName="institution">
-      <div class="alert alert-danger" role="alert" *ngIf="resumeForm.get('institution').touched && resumeForm.get('institution').errors">{{getError('institution')}}</div>
+      <input type="text" class="form-ctrl" name="institution" id="institution" placeholder="Institución" formControlName="institution" [ngClass]="{'form-ctrl-error': resumeForm.get('institution').touched && resumeForm.get('institution').errors}">
+      <div class="alert-danger" role="alert" *ngIf="resumeForm.get('institution').touched && resumeForm.get('institution').errors">{{getError('institution')}}</div>
     </div>
     <div class="form-group mt-3">
       <label for="syllabus">Plan: (o temas vistos)</label>
-      <input type="text" class="form-control" name="syllabus" id="syllabus" placeholder="Plan de Estudios" formControlName="syllabus">
-      <div class="alert alert-danger" role="alert" *ngIf="resumeForm.get('syllabus').touched && resumeForm.get('syllabus').errors">{{getError('syllabus')}}</div>
+      <input type="text" class="form-ctrl" name="syllabus" id="syllabus" placeholder="Plan de Estudios" formControlName="syllabus" [ngClass]="{'form-ctrl-error': resumeForm.get('syllabus').touched && resumeForm.get('syllabus').errors}">
+      <div class="alert-danger" role="alert" *ngIf="resumeForm.get('syllabus').touched && resumeForm.get('syllabus').errors">{{getError('syllabus')}}</div>
     </div>
     <div class="form-group mt-3 mb-3">
       <label for="linkToSyllabus">Link al temario: (opcional)</label>
-      <input type="text" class="form-control" name="linkToSyllabus" id="linkToSyllabus" placeholder="Link al plan de estudios" formControlName="linkToSyllabus">
-      <div class="alert alert-danger" role="alert" *ngIf="resumeForm.get('linkToSyllabus').touched && resumeForm.get('linkToSyllabus').errors">{{getError('linkToSyllabus')}}</div>
+      <input type="text" class="form-ctrl" name="linkToSyllabus" id="linkToSyllabus" placeholder="Link al plan de estudios" formControlName="linkToSyllabus" [ngClass]="{'form-ctrl-error': resumeForm.get('linkToSyllabus').touched && resumeForm.get('linkToSyllabus').errors}">
+      <div class="alert-danger" role="alert" *ngIf="resumeForm.get('linkToSyllabus').touched && resumeForm.get('linkToSyllabus').errors">{{getError('linkToSyllabus')}}</div>
     </div>
     <div class="form-group mt-3 mb-3">
       <label for="linkToSyllabus">Link al Icono: (opcional)</label>
-      <input type="text" class="form-control" name="logo" id="logo" placeholder="Link al logo" formControlName="logo">
-      <div class="alert alert-danger" role="alert" *ngIf="resumeForm.get('logo').touched && resumeForm.get('logo').errors">{{getError('logo')}}</div>
+      <input type="text" class="form-ctrl" name="logo" id="logo" placeholder="Link al logo" formControlName="logo" [ngClass]="{'form-ctrl-error': resumeForm.get('logo').touched && resumeForm.get('logo').errors}">
+      <div class="alert-danger" role="alert" *ngIf="resumeForm.get('logo').touched && resumeForm.get('logo').errors">{{getError('logo')}}</div>
     </div>
-    <div class="text-center"><button type="submit" class="btn btn-primary" [disabled]="resumeForm.invalid">Añadir</button></div>
+    <div class="text-center"><button type="submit" class="bttn bttn-primary" [disabled]="resumeForm.invalid">Añadir</button></div>
   </form>
 </app-modal>

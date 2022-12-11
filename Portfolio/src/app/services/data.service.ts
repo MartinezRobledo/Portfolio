@@ -21,7 +21,7 @@ export class DataService {
     'Universitario',
     'adrianfmart@gmail.com',
     'Freelance',
-    'Desarrollador Full Stacks Jr.',
+    ['Desarrollador Full Stacks Jr.', 'Técnico en Electrónica'],
     '../../assets/img/selfi.png'
   );
 
@@ -64,7 +64,7 @@ export class DataService {
     this.formation = Object.assign({}, formation)
   }
 
-  edition:boolean = false;
+  edition:boolean = true;
 //skills component
   skills:Habilidad[] = [
     {name: 'HTML', value: 90},

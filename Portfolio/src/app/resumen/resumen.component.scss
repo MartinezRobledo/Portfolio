@@ -25,3 +25,48 @@
 .index{
     z-index:10 !important;
 }
+
+.form{
+    &-ctrl{
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        margin-bottom: .8rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        appearance: none;
+        border-radius: 0.375rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        &-error{
+            border-color: red;
+        }
+    }
+}
+
+.alert-danger{
+    position: relative;
+    bottom: 1rem;
+    color: red;
+}
+
+.bttn{
+    text-align: center;
+    padding: 10px 35px;
+    border-radius: 50px;
+    color: white;
+    border: 0;
+}
+.bttn-danger{
+    background-color: rgb(223, 43, 43);
+}
+.bttn-primary{
+    background-color: #0563bb;
+}
+.bttn-success{
+    background-color: rgb(39, 158, 39);
+}

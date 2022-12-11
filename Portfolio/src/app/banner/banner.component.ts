@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import Typewriter from 't-writer.js'
 import { Persona } from '../Models/Persona';
 import { DataService } from '../services/data.service';
 
@@ -18,30 +17,6 @@ export class BannerComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    const target = document.querySelector('.tw')
-
-  const options = {
-    loop: true
-  }
-
-  const writer = new Typewriter(target, {
-    loop: true,
-    typeSpeed: 80,
-    deleteSpeed: 80,
-    typeColor: 'black'
-  })
-  
-  writer
-    .type('Soy ' + this.persona.degree)
-    .rest(600)
-    .changeOps({ deleteSpeed: 80 })
-    .remove(this.persona.degree.length)
-    .type(this.persona.degree)
-    .rest(600)
-    .changeOps({ deleteSpeed: 20 })
-    .remove(this.persona.degree.length)
-    .clear()
-    .start()
-  }
+}
 }
 

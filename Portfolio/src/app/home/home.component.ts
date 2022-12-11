@@ -27,15 +27,12 @@ export class HomeComponent implements OnInit {
     } else if(scrollToTop >= 3801 && scrollToTop <= 4500 ) {
       SetEverythingOffExcept('contact-nav-id', document)
     }
-    //console.log(bottom)
-    // console.log(child.scrollHeight)
-    // console.log(child.scrollTop)
-    // console.log(child.clientHeight)
   }
 
   constructor() {
   }
 
   ngOnInit(): void {
+    window.scrollTo(0,0);
   }
 }

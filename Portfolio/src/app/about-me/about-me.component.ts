@@ -44,7 +44,7 @@ export class AboutMeComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       email: [this.adrian.email, [Validators.email, Validators.required]],
       birthplace: [this.adrian.birthplace, [Validators.minLength(3), Validators.maxLength(100), Validators.required]],
-      birthdate: [this.adrian.birthdate],
+      birthdate: [this.adrian.birthdate, Validators.required],
       address: [this.adrian.address, [Validators.minLength(3), Validators.maxLength(100), Validators.required]],
       studyLevel: [this.adrian.studyLevel, [Validators.minLength(3), Validators.maxLength(20), Validators.required]],
       ocupation: [this.adrian.ocupation, [Validators.minLength(3), Validators.maxLength(30), Validators.required]],

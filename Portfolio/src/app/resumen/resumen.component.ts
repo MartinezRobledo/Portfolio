@@ -32,8 +32,8 @@ export class ResumenComponent implements OnInit {
   private formBuild(){
     this.resumeForm = this.fb.group({
       degree: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      since: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
-      until: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
+      since: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern(/^[0-9]/)]],
+      until: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern(/^[0-9]/)]],
       institution: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       syllabus: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]],
       linkToSyllabus: ['', Validators.maxLength(200)],
@@ -68,12 +68,13 @@ export class ResumenComponent implements OnInit {
     const control = this.resumeForm.get(controlName);
     if (control.touched && control.errors != null) {
       error = JSON.stringify(control.errors);
+      console.log(error);
     }
     return this.typeError(error);
   }
 
   typeError(error:string):string{
-    const errorList:string[] = ['required', 'maxlength', 'minlength', 'email'];
+    const errorList:string[] = ['required', 'maxlength', 'minlength', 'email', 'requiredPattern'];
     let valor:string;
     errorList.forEach((e) => {
       if(error.includes(e)){
@@ -97,7 +98,10 @@ export class ResumenComponent implements OnInit {
         message = 'El valor ingresado es demasiado corto';
         break;
       case 'email':
-        message = 'El email es inválido. Por favor ingrese un formato válido'
+        message = 'El email es inválido. Por favor ingrese un formato válido';
+        break;
+      case 'requiredPattern':
+        message = 'Ingrese un número de 4 dígitos';
         break;
     }
     return message;

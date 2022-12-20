@@ -21,7 +21,7 @@ export class DataService {
     'Universitario',
     'adrianfmart@gmail.com',
     'Freelance',
-    ['Desarrollador Full Stacks Jr.', 'Técnico en Electrónica'],
+    ['Desarrollador Full Stacks Jr.'],
     '../../assets/img/selfi.png'
   );
 

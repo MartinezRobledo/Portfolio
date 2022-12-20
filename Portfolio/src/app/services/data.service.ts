@@ -94,32 +94,27 @@ export class DataService {
   proyects:Proyects[] = [
     {
       title: 'Portfolio',
-      type: 'Web',
-      class: 'filter-web',
+      type: 'web',
       linkProyect: 'https://glowing-travesseiro-631628.netlify.app/'
     },
     {
       title: 'Caliuma Construcciones',
-      type: 'Web',
-      class: 'filter-web',
+      type: 'web',
       linkProyect: 'https://chimerical-meringue-220df9.netlify.app/#/'
     },
     {
       title: 'Calculadora con tema oscuro',
-      type: 'App',
-      class: 'filter-app',
+      type: 'app',
       linkProyect: 'https://golden-belekoy-909d83.netlify.app/'
     },
     {
       title: 'Librerías propias en C',
-      type: 'App',
-      class: 'filter-app',
+      type: 'app',
       linkProyect: 'https://github.com/MartinezRobledo/Librerias-Propias-C'
     },
     {
       title: 'Algoritmos BFS y DFS en C++',
-      type: 'App',
-      class: 'filter-app',
+      type: 'app',
       linkProyect: 'https://github.com/MartinezRobledo/ProgramacionCompetitiva'
     },
   ]

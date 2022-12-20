@@ -24,48 +24,52 @@
   <!-- End Header -->
   <app-modal #modal [title]="'INICIAR SESIÓN'">
     <div class="container">
-      <div class="row">
-        <div class="col-6">
-          <form>
+      <form [formGroup]="loginForm" (submit)="onSubmit()">
+        <div class="row">
+          <div class="col-6">
             <label for="email">Email:</label>
-            <input type="text" id="email" name="email" class="form-ctrl">
+            <input type="text" id="email" name="email" class="form-ctrl" formControlName="email">
+            <div class="alert-danger" role="alert" *ngIf="loginForm.get('email').touched && loginForm.get('email').errors">{{getError('email')}}</div>
             <label for="password">Contraseña:</label>
-            <input type="text" id="password" name="password" class="form-ctrl">
-          </form>
-        </div>
-        <div class="col-6 sesion-contain">
-          <div class="row d-flex justify-content-center">
-            <button class="bttn bttn-success bttn-success-sesion">Iniciar Sesión</button>
+            <input type="password" id="password" name="password" class="form-ctrl" formControlName="password">
+            <div class="alert-danger" role="alert" *ngIf="loginForm.get('password').touched && loginForm.get('password').errors">{{getError('password')}}</div>
           </div>
-          <div class="row d-flex justify-content-center">
-            <button class="bttn bttn-primary bttn-primary-sesion" (click)="modal.hideModal();modal1.showModal()">Regístrate</button>
+          <div class="col-6 sesion-contain">
+            <div class="row d-flex justify-content-center">
+              <button class="bttn bttn-success bttn-success-sesion" type="submit">Iniciar Sesión</button>
+            </div>
+            <div class="row d-flex justify-content-center">
+              <button class="bttn bttn-primary bttn-primary-sesion" (click)="modal.hideModal();modal1.showModal()">Regístrate</button>
+            </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </app-modal>
   <app-modal #modal1 [title]="'REGISTRARSE'">
     <div class="container">
-      <form>
+      <form [formGroup]="signinForm" (submit)="onSubmit()">
         <div class="row">
           <div class="col-6">
             <label for="name">Nombre:</label>
-            <input type="text" id="name" name="name" class="form-ctrl">
+            <input type="text" id="name" name="name" class="form-ctrl" formControlName="name">
+            <div class="alert-danger" role="alert" *ngIf="signinForm.get('name').touched && signinForm.get('name').errors">{{getError('name')}}</div>
           </div>
           <div class="col-6">
             <label for="lastname">Apellido:</label>
-            <input type="text" id="lastname" name="lastname" class="form-ctrl">
+            <input type="text" id="lastname" name="lastname" class="form-ctrl" formControlName="lastname">
+            <div class="alert-danger" role="alert" *ngIf="signinForm.get('lastname').touched && signinForm.get('lastname').errors">{{getError('lastname')}}</div>
           </div>
         </div>
         <div class="row">
           <label for="email">Email:</label>
-          <input type="email" id="email" name="email" class="form-ctrl">
+          <input type="email" id="email" name="email" class="form-ctrl" formControlName="email">
           <label for="password">Contraseña:</label>
-          <input type="password" id="password" name="password" class="form-ctrl">
+          <input type="password" id="password" name="password" class="form-ctrl" formControlName="password">
           <label for="rPassword">Repetir Contraseña:</label>
-          <input type="password" id="rPassword" name="rPassword" class="form-ctrl">
+          <input type="password" id="rPassword" name="rPassword" class="form-ctrl" formControlName="rPassword">
         </div>
-        <div class="text-center"><button class="bttn bttn-primary bttn-primary-sesion" (click)="modal1.hideModal()">Registrar</button></div>
+        <div class="text-center"><button type="submit" class="bttn bttn-primary bttn-primary-sesion" (click)="modal1.hideModal()">Registrar</button></div>
       </form>
     </div>
   </app-modal>

@@ -20,7 +20,6 @@ import { DataService } from './services/data.service';
 import { ModalComponent } from './shared/modal/modal.component';
 import { SafePipe } from './safe.pipe';
 import { NgxTypedJsModule } from 'ngx-typed-js';
-import { SignInComponent } from './sign-in/sign-in.component';
 
 
 @NgModule({
@@ -37,7 +36,6 @@ import { SignInComponent } from './sign-in/sign-in.component';
     HeaderComponent,
     ModalComponent,
     SafePipe,
-    SignInComponent,
   ],
   imports: [
     BrowserModule,

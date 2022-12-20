@@ -64,7 +64,7 @@ export class DataService {
     this.formation = Object.assign({}, formation)
   }
 
-  edition:boolean = true;
+  edition:boolean = false;
 //skills component
   skills:Habilidad[] = [
     {name: 'HTML', value: 90},

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Persona } from '../Models/Persona';
 import { DataService } from '../services/data.service';
 
@@ -8,15 +8,13 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./banner.component.scss']
 })
 
-export class BannerComponent implements OnInit{
+export class BannerComponent{
 
   persona:Persona;
 
   constructor(private dataService:DataService){
-    this.persona = dataService.persona;
+    this.persona = this.dataService.persona;
   }
 
-  ngOnInit(): void {
-}
 }
 

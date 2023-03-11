@@ -9,22 +9,15 @@ import { DataService } from '../services/data.service';
 })
 export class ProyectsComponent implements OnInit {
 
-  proyects:Proyects[] = [];
+  proyectos:Proyects[];
   proyectLink:string;
   proyectName:string;
 
   constructor(private dataService:DataService) {
-    this.proyects = this.dataService.proyects.slice();
+    this.proyectos = this.dataService.proyectos;
   }
 
-  ngOnInit(): void {
-  }
-
-  getUrl(i:number){
-    if(this.proyects[i].linkProyect.includes('github')){
-      return `https://www.muylinux.com/wp-content/uploads/2017/06/github.png`;
-    }
-    return this.proyects[i].linkProyect;
+  ngOnInit(){
   }
 
   setDataModal(link:string, name:string){

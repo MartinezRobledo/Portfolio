@@ -1,5 +1,5 @@
 //Modulos
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { InViewportModule } from 'ng-in-viewport';
 import { AppRoutingModule } from './app-routing.module';
@@ -20,7 +20,11 @@ import { DataService } from './services/data.service';
 import { ModalComponent } from './shared/modal/modal.component';
 import { SafePipe } from './safe.pipe';
 import { NgxTypedJsModule } from 'ngx-typed-js';
+import { HttpClientModule } from '@angular/common/http';
 
+export function parameterProviderFactory(provider: DataService) {
+  return () => provider.getDatos();
+}
 
 @NgModule({
   declarations: [
@@ -44,9 +48,15 @@ import { NgxTypedJsModule } from 'ngx-typed-js';
     InViewportModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxTypedJsModule
+    NgxTypedJsModule,
+    HttpClientModule
   ],
-  providers: [DataService],
+  providers: [{
+        provide: APP_INITIALIZER,
+        useFactory: parameterProviderFactory,
+        deps: [DataService],
+        multi: true
+      }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

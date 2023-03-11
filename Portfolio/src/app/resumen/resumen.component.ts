@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Education } from '../Models/Educacion';
+import { Experiencia } from '../Models/Experiencia';
 import { AuthService } from '../services/auth.service';
 import { DataService } from '../services/data.service';
 
@@ -13,20 +14,24 @@ import { DataService } from '../services/data.service';
 
 export class ResumenComponent implements OnInit {
 
-  formation:Education [] = [];
+  formacion:Education[];
+  experiencia:Experiencia[];
   login$ = this.auth.loggedIn$;
   edition: boolean;
   availForm:boolean = false;
 
   resumeForm:FormGroup;
+  expForm:FormGroup;
 
   constructor(private dataService:DataService, private fb:FormBuilder, private auth:AuthService) { 
     this.edition = this.dataService.edition;
-    this.formation = this.dataService.formation.slice()
+    this.formacion = this.dataService.formacion;
+    this.experiencia = this.dataService.experiencia;
   }
 
   ngOnInit(): void {
     this.formBuild();
+    this.formBuildexp();
   }
 
   private formBuild(){
@@ -38,7 +43,19 @@ export class ResumenComponent implements OnInit {
       syllabus: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]],
       linkToSyllabus: ['', Validators.maxLength(200)],
       logo: ['', Validators.maxLength(200)],
-    })
+    });
+  }
+
+  private formBuildexp(){
+    this.expForm = this.fb.group({
+      rol: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      since: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern(/^[0-9]/)]],
+      until: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern(/^[0-9]/)]],
+      empresa: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      descripcion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]],
+      linkALaEmpresa: ['', Validators.maxLength(200)],
+      logo: ['', Validators.maxLength(200)],
+    });
   }
 
   validateEdition(){
@@ -46,21 +63,22 @@ export class ResumenComponent implements OnInit {
   }
 
   eliminarElemento(i:number){
-    this.formation.splice(i, 1);
-  }
-
-  reset(){
-    this.formation = this.dataService.formation.slice()
+    this.dataService.removeExperiencia(this.experiencia[i].id).subscribe();
+    this.experiencia.splice(i, 1);
   }
 
   saveChanges(){
-    this.dataService.formation = Object.assign({}, this.formation);
-    this.dataService.formation = this.formation.slice();
     this.dataService.edition = false;
   }
 
   onSubmit(){
-    this.formation.push(this.resumeForm.value);
+    this.formacion.push(this.resumeForm.value);
+    this.dataService.addFormacion(this.formacion.at(-1)).subscribe();
+  }
+
+  exponSubmitexp(){
+    this.experiencia.push(this.expForm.value);
+    this.dataService.addExperiencia(this.experiencia.at(-1)).subscribe();
   }
 
   public getError(controlName: string):string{

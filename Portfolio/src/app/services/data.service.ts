@@ -3,121 +3,114 @@ import { Education } from '../Models/Educacion';
 import { Habilidad } from '../Models/Habilidad';
 import { Persona } from '../Models/Persona';
 import { Proyects } from '../Models/Proyects';
+import { HttpClient } from '@angular/common/http'
+import { Observable } from 'rxjs';
+import { Experiencia } from '../Models/Experiencia';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor() { }
-//about-me component
-  persona:Persona = new Persona(
-    'Adrián',
-    'Martínez',
-    '1996-11-22',
-    'Merlo, Buenos Aires, Argentina',
-    'Montevideo, Uruguay',
-    1128932478,
-    'Universitario',
-    'adrianfmart@gmail.com',
-    'Freelance',
-    ['Desarrollador Full Stacks Jr.'],
-    '../../assets/img/selfi.png'
-  );
+  private _urlData = "http://localhost:8080/datos";
+  private _urlSkills = "http://localhost:8080/skills";
+  private _urlProyectos = "http://localhost:8080/proyectos";
+  private _urlEducacion = "http://localhost:8080/educacion";
+  private _urlExperiencia = "http://localhost:8080/experiencia";
 
-  updatePersona(persona:Persona){
-    // this.persona = Object.assign({}, persona);
-    this.persona = persona;
+  persona:Persona;
+  skills:Habilidad[];
+  proyectos:Proyects[];
+  formacion:Education[];
+  experiencia:Experiencia[];
+
+  constructor(private http:HttpClient) {
+    this.getDatos().subscribe(datos =>{
+      this.persona = datos[0];
+    });
+
+    this.getSkills().subscribe(skills =>{
+      this.skills = skills;
+    });
+
+    this.getProyectos().subscribe(proyectos =>{
+      this.proyectos = proyectos;
+    });
+
+    this.getEducacion().subscribe(formacion =>{
+      this.formacion = formacion;
+    });
+
+    this.getExperiencia().subscribe(experiencia =>{
+      this.experiencia = experiencia;
+    });
+   }
+
+  getDatos():Observable<Persona>{
+    return this.http.get<Persona>(`${this._urlData}`);
   }
-//Resumen component
-  formation:Education[] = [
-    {
-      degree: 'Ingeniería Informática',
-      since: '2017',
-      until: 'actual',
-      institution: 'Universidad Nacional de La Matanza, Buenos Aires, Argentina',
-      syllabus: 'Plan de estudios',
-      linkToSyllabus: 'https://ingenieria.unlam.edu.ar/index.php?seccion=3&idArticulo=30',
-      logo: '../../assets/img/unlamlogo.png',
-    },
-    {
-      degree: 'Desarrollador Web Full Stacks',
-      since: '07/2022',
-      until: 'actual',
-      institution: 'Argentina Programa',
-      syllabus: 'Plan de estudios Angular & Java',
-      linkToSyllabus: 'https://www.argentina.gob.ar/produccion/argentina-programa/segunda-etapa',
-      logo: '../../assets/img/arg-programa.png',
-    },
-    {
-      degree: 'Desarrollador Web Full Stacks',
-      since: '07/2022',
-      until: '12/2022',
-      institution: 'Codo a Codo - Ciudad de Buenos Aires',
-      syllabus: 'Plan de estudios VUE.js & Python',
-      linkToSyllabus: '',
-      logo: '../../assets/img/codoAcodo.png',
-    },
-  ];
 
-  updateFormation(formation:Education[]){
-    this.formation = Object.assign({}, formation)
+  actualizarDatos(persona:Persona):Observable<Object>{
+    return this.http.put(`${this._urlData+'/'+persona.id}`, persona);
+  }
+
+  //Resumen component
+  getEducacion(): Observable<Education[]>{
+    return this.http.get<Education[]>(`${this._urlEducacion}`);
+  }
+
+  addFormacion(formacion:Education):Observable<Object>{
+    return this.http.post(`${this._urlEducacion}`, formacion);
+  }
+
+  removeFormacion(id:number):Observable<Object>{
+    return this.http.delete(`${this._urlEducacion+'/'+id}`);
   }
 
   edition:boolean = false;
+
 //skills component
-  skills:Habilidad[] = [
-    {name: 'HTML', value: 90},
-    {name: 'CSS', value: 80},
-    {name: 'JavaScript', value: 75},
-    {name: 'TypeScript', value: 70},
-    {name: 'Angular', value: 65},
-    {name: 'VUE', value: 40},
-    {name: 'MySQL', value: 55},
-    {name: 'C/C++', value: 95},
-    {name: 'Python', value: 30},
-    {name: 'Java', value: 35},
-  ]
 
-  addSkill(skill:Habilidad){
-    this.skills.push(skill);
+  getSkills(): Observable<Habilidad[]>{
+    return this.http.get<Habilidad[]>(`${this._urlSkills}`);
   }
 
-  removeSkill(i:number){
-    this.skills.splice(i, 1);
+  addSkill(skill:Habilidad):Observable<Object>{
+    return this.http.post(`${this._urlSkills}`, skill);
   }
 
-  updateSkill(i:number, skill:Habilidad){
-    this.skills[i] = skill;
+  removeSkill(id:number):Observable<Object>{
+    return this.http.delete(`${this._urlSkills+'/'+id}`);
   }
-//proyects component
-  proyects:Proyects[] = [
-    {
-      title: 'Portfolio',
-      type: 'web',
-      linkProyect: 'https://glowing-travesseiro-631628.netlify.app/'
-    },
-    {
-      title: 'Caliuma Construcciones',
-      type: 'web',
-      linkProyect: 'https://chimerical-meringue-220df9.netlify.app/#/'
-    },
-    {
-      title: 'Calculadora con tema oscuro',
-      type: 'app',
-      linkProyect: 'https://golden-belekoy-909d83.netlify.app/'
-    },
-    {
-      title: 'Librerías propias en C',
-      type: 'app',
-      linkProyect: 'https://github.com/MartinezRobledo/Librerias-Propias-C'
-    },
-    {
-      title: 'Algoritmos BFS y DFS en C++',
-      type: 'app',
-      linkProyect: 'https://github.com/MartinezRobledo/ProgramacionCompetitiva'
-    },
-  ]
 
+  updateSkill(id:number, skill:Habilidad):Observable<Object>{
+    return this.http.put(`${this._urlSkills+'/'+id}`, skill);
+  }
+
+  //proyects component
+  getProyectos(): Observable<Proyects[]>{
+    return this.http.get<Proyects[]>(`${this._urlProyectos}`);
+  }
+
+  addProyectos(proyecto:Proyects):Observable<Object>{
+    return this.http.post(`${this._urlProyectos}`, proyecto);
+  }
+
+  removeProyectos(id:number):Observable<Object>{
+    return this.http.delete(`${this._urlProyectos+'/'+id}`);
+  }
+
+  //Experiencia component
+  getExperiencia(): Observable<Experiencia[]>{
+    return this.http.get<Experiencia[]>(`${this._urlExperiencia}`);
+  }
+
+  addExperiencia(experiencia:Experiencia):Observable<Object>{
+    return this.http.post(`${this._urlExperiencia}`, experiencia);
+  }
+
+  removeExperiencia(id:number):Observable<Object>{
+    return this.http.delete(`${this._urlExperiencia+'/'+id}`);
+  }
 }
 

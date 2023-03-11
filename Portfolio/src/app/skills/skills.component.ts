@@ -13,16 +13,16 @@ import { DataService } from '../services/data.service';
 
 export class SkillsComponent {
 
-  skills:Habilidad[] = [];
+  skillsCol1:Habilidad[];
+  skillsCol2:Habilidad[];
   newSkill:FormGroup;
   login$ = this.auth.loggedIn$;
   delete:boolean = false;
   update:boolean = false;
 
-  habilitar = {eliminar:'Habilitar', actualizar:'Habilitar'}
-
   constructor(private dataService:DataService, private auth:AuthService, private fb:FormBuilder) {
-    this.skills = this.dataService.skills;
+    this.skillsCol1= [...this.dataService.skills];
+    this.skillsCol2 = this.skillsCol1.splice(0, (this.skillsCol1.length)/2);
     this.newSkill = this.fb.group({
       name:['', [Validators.required, Validators.minLength(2)]],
       value:['', [Validators.required, Validators.pattern(/^\d+$/)]]
@@ -30,7 +30,7 @@ export class SkillsComponent {
    }
 
   onSubmit(){
-    this.dataService.addSkill(this.newSkill.value);
+    this.dataService.addSkill(this.newSkill.value).subscribe();
   }
 
   validarType(value:number): string {
@@ -46,24 +46,17 @@ export class SkillsComponent {
 
   habilitarEliminar(){
     this.delete = !this.delete;
-      if(this.delete)
-        this.habilitar.eliminar = 'Deshabilitar';
-      else
-        this.habilitar.eliminar = 'Habilitar';
   }
   habilitarActualizar(){
     this.update = !this.update;
-    if(this.update)
-        this.habilitar.actualizar = 'Deshabilitar';
-      else
-        this.habilitar.actualizar = 'Habilitar';
   }
 
-  eliminarElemento(i:number){
-    this.dataService.removeSkill(i);
+  eliminarElemento(id:number){
+    console.log(id);
+    this.dataService.removeSkill(id).subscribe();
   }
 
-  actualizarElemento(i:number,value:number){
-    this.dataService.updateSkill(i, this.skills[i]);
+  actualizarElemento(id:number,skill:Habilidad){
+    this.dataService.updateSkill(id, skill).subscribe();
   }
 }

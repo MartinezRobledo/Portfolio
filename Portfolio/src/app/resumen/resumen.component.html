@@ -17,7 +17,7 @@
     <div class="row">
       <div class="col-lg-6">
         <h3 class="resume-title">Educación</h3>
-        <div class="d-flex flex-row"  *ngFor="let education of formation; let i=index">
+        <div class="d-flex flex-row"  *ngFor="let education of formacion; let i=index">
           <button class="rounded-circle btn btn-danger p-2 btn-close m-close" (click)="eliminarElemento(i)" *ngIf="edition"></button>
           <div class="resume-item p-4">
             <h4>{{education.degree}}</h4>
@@ -37,16 +37,22 @@
       </div>
       <div class="col-lg-6">
         <h3 class="resume-title">Experiencia Laboral</h3>
-        <div class="resume-item">
-          <h4>Freelance</h4>
-          <h5>Present</h5>
-          <p><em>Página Web para consultorio de Ortodoncia</em></p>
-          <ul>
-            <li>Frontend en Angular</li>
-            <li>Maquetado en Bootstrap</li>
-            <li>Base de datos en MySQL</li>
-            <li>Backend en Java</li>
-          </ul>
+        <div class="d-flex flex-row"  *ngFor="let exp of experiencia; let i=index">
+          <button class="rounded-circle btn btn-danger p-2 btn-close m-close" (click)="eliminarElemento(i)" *ngIf="edition"></button>
+          <div class="resume-item p-4">
+            <h4>{{exp.rol}}</h4>
+            <h5>{{exp.since}}-{{exp.until}}</h5>
+            <div class="d-flex flex-row p-1 m-1">
+                <div><img  [src]="exp.logo" [alt]="exp.empresa" width="50" height="50"></div>
+                <div><p class="col-11 m-0 p-2 align-self-center"><b><em>{{exp.empresa}}</em></b></p></div>
+            </div>
+            <p class="mb-0">{{exp.descripcion}}</p>
+            <a [href]="exp.linkALaEmpresa">
+                {{exp.linkALaEmpresa}}</a>
+          </div>
+        </div>
+        <div class="d-flex flex-row">
+          <button class="rounded-circle btn btn-success" *ngIf="edition" (click)="modal2.showModal()">+</button>
         </div>
       </div>
     </div>
@@ -55,8 +61,7 @@
               <form class="php-email-form" #updateForm="ngForm">
               </form>
         <div class="d-flex justify-content-center">
-          <div class="m-3"><button class="bttn bttn-danger" (click)="reset()">Resetear Cambios</button></div>
-          <div class="m-3"><button class="bttn bttn-success" routerLink="" (click)="saveChanges()">Guardar cambios y volver</button></div>
+          <div class="m-3"><button class="bttn bttn-success" routerLink="" (click)="saveChanges()">Volver</button></div>
         </div>
       </div>
     </div>
@@ -102,5 +107,48 @@
       <div class="alert-danger" role="alert" *ngIf="resumeForm.get('logo').touched && resumeForm.get('logo').errors">{{getError('logo')}}</div>
     </div>
     <div class="text-center"><button type="submit" class="bttn bttn-primary" [disabled]="resumeForm.invalid">Añadir</button></div>
+  </form>
+</app-modal>
+
+<app-modal #modal2 [title]="'NUEVA EXPERIENCIA'">
+  <form class="php-email-form" [formGroup]="expForm" (ngSubmit)="exponSubmitexp(); modal2.hideModal()">
+    <div class="form-group">
+      <label for="rol">Cargo laboral:</label>
+      <input type="text" name="rol" class="form-ctrl" id="rol" placeholder="Puesto" formControlName="rol" [ngClass]="{'form-ctrl-error': expForm.get('rol').touched && expForm.get('rol').errors}">
+      <div class="alert-danger" role="alert" *ngIf="expForm.get('rol').touched && expForm.get('rol').errors">{{getError('rol')}}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <label for="since">Desde:</label>
+        <input type="text" name="since" class="form-ctrl" id="since" placeholder="Año de inicio" formControlName="since" [ngClass]="{'form-ctrl-error': expForm.get('since').touched && expForm.get('since').errors}">
+        <div class="alert-danger" role="alert" *ngIf="expForm.get('since').touched && expForm.get('since').errors">{{getError('since')}}</div>
+      </div>
+      <div class="col-md-6 form-group">
+        <label for="until">Hasta:</label>
+        <input type="text" name="until" class="form-ctrl" id="until" placeholder="Año de finalización" formControlName="until" [ngClass]="{'form-ctrl-error': expForm.get('until').touched && expForm.get('until').errors}">
+        <div class="alert-danger" role="alert" *ngIf="expForm.get('until').touched && expForm.get('until').errors">{{getError('until')}}</div>
+      </div>
+    </div>
+    <div class="form-group mt-3">
+      <label for="empresa">Empresa:</label>
+      <input type="text" class="form-ctrl" name="empresa" id="empresa" placeholder="empresa" formControlName="empresa" [ngClass]="{'form-ctrl-error': expForm.get('empresa').touched && expForm.get('empresa').errors}">
+      <div class="alert-danger" role="alert" *ngIf="expForm.get('empresa').touched && expForm.get('empresa').errors">{{getError('empresa')}}</div>
+    </div>
+    <div class="form-group mt-3">
+      <label for="descripcion">Descripcion del puesto:</label>
+      <input type="text" class="form-ctrl" name="descripcion" id="descripcion" placeholder="Desarrollo web Angular" formControlName="descripcion" [ngClass]="{'form-ctrl-error': expForm.get('descripcion').touched && expForm.get('descripcion').errors}">
+      <div class="alert-danger" role="alert" *ngIf="expForm.get('descripcion').touched && expForm.get('descripcion').errors">{{getError('descripcion')}}</div>
+    </div>
+    <div class="form-group mt-3 mb-3">
+      <label for="linkALaEmpresa">Link a la Empresa: (opcional)</label>
+      <input type="text" class="form-ctrl" name="linkALaEmpresa" id="linkALaEmpresa" placeholder="www.google.com" formControlName="linkALaEmpresa" [ngClass]="{'form-ctrl-error': expForm.get('linkALaEmpresa').touched && expForm.get('linkALaEmpresa').errors}">
+      <div class="alert-danger" role="alert" *ngIf="expForm.get('linkALaEmpresa').touched && expForm.get('linkALaEmpresa').errors">{{getError('linkALaEmpresa')}}</div>
+    </div>
+    <div class="form-group mt-3 mb-3">
+      <label for="logo">Link al Logo: (opcional)</label>
+      <input type="text" class="form-ctrl" name="logo" id="logo" placeholder="https://google.com/logo-Google.png" formControlName="logo" [ngClass]="{'form-ctrl-error': expForm.get('logo').touched && expForm.get('logo').errors}">
+      <div class="alert-danger" role="alert" *ngIf="expForm.get('logo').touched && expForm.get('logo').errors">{{getError('logo')}}</div>
+    </div>
+    <div class="text-center"><button type="submit" class="bttn bttn-primary" [disabled]="expForm.invalid">Añadir</button></div>
   </form>
 </app-modal>

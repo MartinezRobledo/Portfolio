@@ -1,6 +1,4 @@
-// @ts-nocheck
-import { Component } from '@angular/core';
-import Typewriter from 't-writer.js'
+import { Component, OnInit } from '@angular/core';
 
 
 @Component({
@@ -18,5 +16,3 @@ export class AppComponent implements OnInit{
 
 
 }
-
-

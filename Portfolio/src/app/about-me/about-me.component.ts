@@ -12,16 +12,21 @@ import { DataService } from '../services/data.service';
 })
 export class AboutMeComponent implements OnInit {
 
-  adrian:Persona;
+  persona:Persona;
   login$ = this.auth.loggedIn$;
   error:boolean = false;
   edad:number;
 
-  formGroup:FormGroup;
+  nuevosDatos:FormGroup;
 
-  constructor(private dataService:DataService, private formBuilder:FormBuilder, private auth:AuthService) { 
-    this.adrian = Object.assign({}, this.dataService.persona);
-    this.edad = this.CalculateAge(this.adrian.birthdate);
+  constructor(private dataService:DataService, private formBuilder:FormBuilder, private auth:AuthService) {
+    this.persona = Object.assign({}, this.dataService.persona);
+    this.buildForm();
+    this.edad = this.CalculateAge(this.persona.birthdate);
+  }
+
+  ngOnInit(){
+    
   }
 
   CalculateAge(birthdate:string): number {
@@ -36,39 +41,41 @@ export class AboutMeComponent implements OnInit {
     return age;
   }
 
-  ngOnInit(): void {
-    this.buildForm();
-  }
-
   private buildForm() {
-    this.formGroup = this.formBuilder.group({
-      email: [this.adrian.email, [Validators.email, Validators.required]],
-      birthplace: [this.adrian.birthplace, [Validators.minLength(3), Validators.maxLength(100), Validators.required]],
-      birthdate: [this.adrian.birthdate, Validators.required],
-      address: [this.adrian.address, [Validators.minLength(3), Validators.maxLength(100), Validators.required]],
-      studyLevel: [this.adrian.studyLevel, [Validators.minLength(3), Validators.maxLength(20), Validators.required]],
-      ocupation: [this.adrian.ocupation, [Validators.minLength(3), Validators.maxLength(30), Validators.required]],
-      phone: [this.adrian.phone, [Validators.maxLength(10), Validators.minLength(10), Validators.required]],
-      name: [this.adrian.name],
-      lastname: [this.adrian.lastname],
-      degree: [this.adrian.degree]
+    this.nuevosDatos = this.formBuilder.group({
+      email: [this.persona.email, [Validators.email, Validators.required]],
+      birthplace: [this.persona.birthplace, [Validators.minLength(3), Validators.maxLength(100), Validators.required]],
+      birthdate: [this.persona.birthdate, Validators.required],
+      address: [this.persona.address, [Validators.minLength(3), Validators.maxLength(100), Validators.required]],
+      studylevel: [this.persona.studylevel, [Validators.minLength(3), Validators.maxLength(20), Validators.required]],
+      ocupation: [this.persona.ocupation, [Validators.minLength(3), Validators.maxLength(30), Validators.required]],
+      phone: [this.persona.phone, [Validators.maxLength(10), Validators.minLength(10), Validators.required]],
+      name: [this.persona.name],
+      lastname: [this.persona.lastname],
+      degree: [this.persona.degree]
     });
   }
 
   changeField(event:any){
-    this.adrian[event.target.name] = "";
-    this.adrian[event.target.name] += event.target.value;
+    this.persona[event.target.name] = "";
+    this.persona[event.target.name] += event.target.value;
   }
 
   onSubmit(){
-    this.adrian = this.formGroup.value;
-    console.log(this.adrian);
-    this.dataService.updatePersona(this.adrian);
+    this.persona.address = this.nuevosDatos.value.address;
+    this.persona.ocupation = this.nuevosDatos.value.ocupation;
+    this.persona.birthdate = this.nuevosDatos.value.birthdate;
+    this.persona.birthplace = this.nuevosDatos.value.birthplace;
+    this.persona.studylevel = this.nuevosDatos.value.studylevel;
+    this.persona.phone = this.nuevosDatos.value.phone;
+    this.persona.email = this.nuevosDatos.value.email;
+    console.log(this.persona)
+    this.dataService.actualizarDatos(this.persona).subscribe();
   }
 
   public getError(controlName: string):string{
     let error = '';
-    const control = this.formGroup.get(controlName);
+    const control = this.nuevosDatos.get(controlName);
     if (control.touched && control.errors != null) {
       error = JSON.stringify(control.errors);
     }
@@ -112,7 +119,7 @@ export class AboutMeComponent implements OnInit {
   }
 
   restoreData(){
-    this.adrian = Object.assign({},this.dataService.persona);
+    this.persona = Object.assign({}, this.dataService.persona);
   }
 
 }

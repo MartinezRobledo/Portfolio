@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router} from '@angular/router';
+import { User } from '../Models/User';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -12,14 +14,21 @@ export class HeaderComponent implements OnInit {
   activo = "hero";
   login$ = this.auth.loggedIn$;
   visible:boolean = false;
+  errorLogin:boolean = false;
+
   loginForm:FormGroup;
   signinForm:FormGroup;
+  usuarios:User[];
 
   alternarClase():void{
     this.visible = !this.visible
   }
     
-  constructor(private auth:AuthService, private fb:FormBuilder) { }
+  constructor(private auth:AuthService, private fb:FormBuilder, private router:Router) {
+    this.auth.getUsuarios().subscribe(datos => {
+      this.usuarios = datos;
+    })
+  }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -34,10 +43,23 @@ export class HeaderComponent implements OnInit {
       password:['',[Validators.required]],
       rPassword:['',[Validators.required]]
     });
+    
   }
 
-  login(){
-    this.auth.logIn();
+  onSubmitLogin(){
+    console.log(this.loginForm.value);
+    for(let usuario of this.usuarios){
+      console.log(usuario.email)
+      if(this.loginForm.value.email === usuario.email){
+        if(this.loginForm.value.password === usuario.password){
+          this.auth.logIn();
+          this.router.navigate(['']);
+        }else
+          this.errorLogin = true;
+      }else
+        this.errorLogin = true;
+    }
+    
   }
 
   logout(){
@@ -88,7 +110,7 @@ export class HeaderComponent implements OnInit {
     return message;
   }
 
-  onSubmit(){
+  onSubmitSignin(){
     
   }
 

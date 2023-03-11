@@ -11,7 +11,7 @@
       </ul>
     </nav><!-- .nav-menu -->
   </header>
-  <div class="login" (click)="modal.showModal()" [ngClass]="{'active':!(login$ | async)}">
+  <div class="login" (click)="[modal.showModal()]" [ngClass]="{'active':!(login$ | async)}">
     <i class="bi bi-box-arrow-in-right"></i>
     <p>log in</p>
   </div>
@@ -24,8 +24,9 @@
   <!-- End Header -->
   <app-modal #modal [title]="'INICIAR SESIÓN'">
     <div class="container">
-      <form [formGroup]="loginForm" (submit)="onSubmit()">
+      <form [formGroup]="loginForm" (submit)="onSubmitLogin()">
         <div class="row">
+          <div class="alert-danger" role="alert" *ngIf="errorLogin">No existe esa combinación de usuario y contraseña</div>
           <div class="col-6">
             <label for="email">Email:</label>
             <input type="text" id="email" name="email" class="form-ctrl" formControlName="email">
@@ -48,7 +49,7 @@
   </app-modal>
   <app-modal #modal1 [title]="'REGISTRARSE'">
     <div class="container">
-      <form [formGroup]="signinForm" (submit)="onSubmit()">
+      <form [formGroup]="signinForm" (submit)="onSubmitSignin()">
         <div class="row">
           <div class="col-6">
             <label for="name">Nombre:</label>

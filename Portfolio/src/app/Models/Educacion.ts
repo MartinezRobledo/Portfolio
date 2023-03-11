@@ -1,4 +1,5 @@
 export class Education{
+    id:number;
     degree:string;
     since:string;
     until:string;

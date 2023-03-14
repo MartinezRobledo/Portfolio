@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">{{title}}</h4>
-                <button (click)="show = false;"><i class="bi bi-x"></i></button>
+                <button name="close" (click)="show = false;"><i class="bi bi-x"></i></button>
             </div>
             <div class="modal-body">
                 <ng-content></ng-content>

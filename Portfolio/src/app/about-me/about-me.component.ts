@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subject, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { Persona } from '../Models/Persona';
 import { AuthService } from '../services/auth.service';
 import { DataService } from '../services/data.service';
+import { SharingService } from '../services/sharing.service';
 
 @Component({
   selector: 'app-about-me',
@@ -13,20 +14,23 @@ import { DataService } from '../services/data.service';
 export class AboutMeComponent implements OnInit {
 
   persona:Persona;
-  login$ = this.auth.loggedIn$;
+  estadoDeSesion$:Observable<boolean>;
   error:boolean = false;
   edad:number;
 
   nuevosDatos:FormGroup;
 
-  constructor(private dataService:DataService, private formBuilder:FormBuilder, private auth:AuthService) {
+  constructor(private dataService:DataService, private formBuilder:FormBuilder, private auth:AuthService, private sharing:SharingService) {
+    this.estadoDeSesion$ = sharing.getEstadoDeSesion;
     this.persona = Object.assign({}, this.dataService.persona);
     this.buildForm();
     this.edad = this.CalculateAge(this.persona.birthdate);
   }
 
   ngOnInit(){
-    
+    this.dataService.getDatos().subscribe(datos =>{
+      this.persona = datos[0];
+    });
   }
 
   CalculateAge(birthdate:string): number {
@@ -69,8 +73,9 @@ export class AboutMeComponent implements OnInit {
     this.persona.studylevel = this.nuevosDatos.value.studylevel;
     this.persona.phone = this.nuevosDatos.value.phone;
     this.persona.email = this.nuevosDatos.value.email;
-    console.log(this.persona)
-    this.dataService.actualizarDatos(this.persona).subscribe();
+    this.dataService.actualizarDatos(this.persona).subscribe(() => {
+      location.reload();
+    });
   }
 
   public getError(controlName: string):string{

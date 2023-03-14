@@ -5,6 +5,11 @@ import { InViewportModule } from 'ng-in-viewport';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { NgxTypedJsModule } from 'ngx-typed-js';
+import { HttpClientModule } from '@angular/common/http';
+
 //Componentes
 import { AppComponent } from './app.component';
 import { BannerComponent } from './banner/banner.component';
@@ -19,8 +24,10 @@ import { HeaderComponent } from './header/header.component';
 import { DataService } from './services/data.service';
 import { ModalComponent } from './shared/modal/modal.component';
 import { SafePipe } from './safe.pipe';
-import { NgxTypedJsModule } from 'ngx-typed-js';
-import { HttpClientModule } from '@angular/common/http';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+
 
 export function parameterProviderFactory(provider: DataService) {
   return () => provider.getDatos();
@@ -49,7 +56,11 @@ export function parameterProviderFactory(provider: DataService) {
     FormsModule,
     ReactiveFormsModule,
     NgxTypedJsModule,
-    HttpClientModule
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    HttpClientModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth())
   ],
   providers: [{
         provide: APP_INITIALIZER,

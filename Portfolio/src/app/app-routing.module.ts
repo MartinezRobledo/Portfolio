@@ -6,15 +6,16 @@ import { HomeComponent } from './home/home.component';
 import { ProyectsComponent } from './proyects/proyects.component';
 import { ResumenComponent } from './resumen/resumen.component';
 import { SkillsComponent } from './skills/skills.component';
+import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 
 const routes:Routes = [
   {path:'', component:HomeComponent, pathMatch: 'full'},
-  {path:'about', component:AboutMeComponent},
-  {path:'skills', component:SkillsComponent},
-  {path:'resumen', component:ResumenComponent},
-  {path:'proyects', component:ProyectsComponent},
-  {path:'contacto', component:ContactoComponent},
-  {path:'**', component:HomeComponent}
+  {path:'about', component:AboutMeComponent, ...canActivate(()=> redirectUnauthorizedTo(['/']))},
+  {path:'skills', component:SkillsComponent, ...canActivate(()=> redirectUnauthorizedTo(['/']))},
+  {path:'resumen', component:ResumenComponent, ...canActivate(()=> redirectUnauthorizedTo(['/']))},
+  {path:'proyects', component:ProyectsComponent, ...canActivate(()=> redirectUnauthorizedTo(['/']))},
+  {path:'contacto', component:ContactoComponent, ...canActivate(()=> redirectUnauthorizedTo(['/']))},
+  {path:'**', component:HomeComponent, ...canActivate(()=> redirectUnauthorizedTo(['/']))}
 ];
 
 @NgModule({
@@ -22,3 +23,4 @@ const routes:Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+

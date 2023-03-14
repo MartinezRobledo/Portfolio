@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+import { SharingService } from '../services/sharing.service';
 
 @Component({
   selector: 'app-contacto',
@@ -9,8 +12,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ContactoComponent implements OnInit {
 
   contactForm:FormGroup;
+  estadoDeSesion$:Observable<boolean>;
 
-  constructor(private fb:FormBuilder) { }
+  constructor(private fb:FormBuilder, private toastr:ToastrService, private sharing:SharingService) { 
+    this.estadoDeSesion$ = sharing.getEstadoDeSesion;
+  }
 
   ngOnInit(): void {
     this.formBuild();
@@ -26,7 +32,27 @@ export class ContactoComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.contactForm.value);
+    this.estadoDeSesion$.subscribe(estado => {
+      if(estado){
+        window.scroll({ 
+          top: 0, 
+          left: 0, 
+          behavior: 'smooth' 
+        });
+        this.contactForm.reset();
+        this.toastr.success("Mensaje enviado correctamente!");
+        }
+        else{
+          window.scroll({ 
+            top: 0, 
+            left: 0, 
+            behavior: 'smooth' 
+          });
+          this.contactForm.reset();
+          this.toastr.error("Debe iniciar sesion para usar el formulario");
+        }
+    })
+    
   }
 
   public getError(controlName: string):string{

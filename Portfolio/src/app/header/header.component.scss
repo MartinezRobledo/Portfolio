@@ -1,6 +1,4 @@
 .login{
-    position: absolute;
-    width: 100%;
     display: none;
     align-items: center;
     justify-content: end;
@@ -8,7 +6,27 @@
     right: 20px;
     font-size: 2rem;
     cursor: pointer;
+}
+
+.logo{
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    top: 5px;
+    padding: 0.1rem 0.8rem;
+    font-size: 1rem;
+    font-weight: 400;
     z-index: 1;
+}
+
+.logo-text{
+    margin: 0 0 0 2px;
+    padding: 0.1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .login p{
@@ -82,5 +100,33 @@
     .login{
         justify-content: flex-start;
         margin-left: 5px;
+    }
+}
+
+@media (max-width: 425px){
+
+    .bttn{
+        text-align: center;
+        padding: 10px 20px;
+        border-radius: 50px;
+        color: white;
+        border: 0;
+        &-danger{
+            background-color: rgb(223, 43, 43);
+        }
+        &-primary{
+            background-color: #0563bb;
+            &-sesion{
+                width: 100%;
+                margin: 1px;
+            }
+        }
+        &-success{
+            background-color: rgb(39, 158, 39);
+            &-sesion{
+                width: 100%;
+                margin: 1px;
+            }
+        }
     }
 }

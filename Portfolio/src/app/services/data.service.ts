@@ -6,6 +6,8 @@ import { Proyects } from '../Models/Proyects';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Experiencia } from '../Models/Experiencia';
+import { AuthService } from './auth.service';
+import { SharingService } from './sharing.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,13 +26,13 @@ export class DataService {
   formacion:Education[];
   experiencia:Experiencia[];
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient, private auth:AuthService) {
     this.getDatos().subscribe(datos =>{
       this.persona = datos[0];
     });
 
     this.getSkills().subscribe(skills =>{
-      this.skills = skills;
+      this.skills = skills.slice();
     });
 
     this.getProyectos().subscribe(proyectos =>{
@@ -45,34 +47,38 @@ export class DataService {
       this.experiencia = experiencia;
     });
    }
+   //Obtencion de informacion
+   getExperiencia(): Observable<Experiencia[]>{
+    return this.http.get<Experiencia[]>(`${this._urlExperiencia}`);
+  }
 
   getDatos():Observable<Persona>{
     return this.http.get<Persona>(`${this._urlData}`);
+  }
+
+  getSkills(): Observable<Habilidad[]>{
+    return this.http.get<Habilidad[]>(`${this._urlSkills}`);
+  }
+
+  getEducacion(): Observable<Education[]>{
+    return this.http.get<Education[]>(`${this._urlEducacion}`);
+  }
+
+  getProyectos(): Observable<Proyects[]>{
+    return this.http.get<Proyects[]>(`${this._urlProyectos}`);
   }
 
   actualizarDatos(persona:Persona):Observable<Object>{
     return this.http.put(`${this._urlData+'/'+persona.id}`, persona);
   }
 
-  //Resumen component
-  getEducacion(): Observable<Education[]>{
-    return this.http.get<Education[]>(`${this._urlEducacion}`);
-  }
-
+  //Modificacion de Base de Datos
   addFormacion(formacion:Education):Observable<Object>{
     return this.http.post(`${this._urlEducacion}`, formacion);
   }
 
   removeFormacion(id:number):Observable<Object>{
     return this.http.delete(`${this._urlEducacion+'/'+id}`);
-  }
-
-  edition:boolean = false;
-
-//skills component
-
-  getSkills(): Observable<Habilidad[]>{
-    return this.http.get<Habilidad[]>(`${this._urlSkills}`);
   }
 
   addSkill(skill:Habilidad):Observable<Object>{
@@ -87,22 +93,12 @@ export class DataService {
     return this.http.put(`${this._urlSkills+'/'+id}`, skill);
   }
 
-  //proyects component
-  getProyectos(): Observable<Proyects[]>{
-    return this.http.get<Proyects[]>(`${this._urlProyectos}`);
-  }
-
   addProyectos(proyecto:Proyects):Observable<Object>{
     return this.http.post(`${this._urlProyectos}`, proyecto);
   }
 
   removeProyectos(id:number):Observable<Object>{
     return this.http.delete(`${this._urlProyectos+'/'+id}`);
-  }
-
-  //Experiencia component
-  getExperiencia(): Observable<Experiencia[]>{
-    return this.http.get<Experiencia[]>(`${this._urlExperiencia}`);
   }
 
   addExperiencia(experiencia:Experiencia):Observable<Object>{

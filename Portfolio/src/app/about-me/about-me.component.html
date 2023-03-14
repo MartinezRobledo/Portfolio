@@ -3,7 +3,7 @@
     <div class="section-title">
       <div class="edit-title">
         <h2>Sobre mí</h2>
-        <i routerLink="/about" routerLinkActive='visually-hidden'  class='bi bi-pen-fill edit-icon' *ngIf="login$ | async" heigth="32"></i>
+        <i routerLink="/about" routerLinkActive='visually-hidden'  class='bi bi-pen-fill edit-icon' *ngIf="estadoDeSesion$ | async" heigth="32"></i>
       </div>
       <p>Soy una persona muy reflexiva y apasionada por los números. 
           Me gustan los retos, busco ponerme objetivos difíciles pero alcanzables. 
@@ -82,7 +82,7 @@
             </div>
             <div class="row">
               <label for="email" class="mb-1">Email:</label>
-              <input type="email" class="form-ctrl" name="email" id="email" (keyup)="changeField($event)" formControlName="email" [ngClass]="{'form-ctrl-error':nuevosDatos.get('email').touched && nuevosDatos.get('email').errors}">
+              <input type="email" class="form-ctrl" name="email" id="emailabout" (keyup)="changeField($event)" formControlName="email" [ngClass]="{'form-ctrl-error':nuevosDatos.get('email').touched && nuevosDatos.get('email').errors}">
               <div class="alert-danger" role="alert" *ngIf="nuevosDatos.get('email').touched && nuevosDatos.get('email').errors">{{getError('email')}}</div>
             </div>
             <div class="row">
@@ -93,7 +93,7 @@
           </div>
         </div>
         <div class="d-flex justify-content-center">
-          <div class="m-3"><button type="button" class="bttn bttn-danger" routerLink="" (click)="restoreData()">Cancelar</button></div>
+          <div class="m-3"><button type="button" class="bttn bttn-danger" routerLink="" >Cancelar</button></div>
           <div class="m-3"><button type="reset" class="bttn bttn-primary">Limpiar</button></div>
           <div class="m-3"><button type="button" class="bttn bttn-success" routerLink="" (click)="onSubmit()" [disabled]="nuevosDatos.invalid">Guardar cambios</button></div>
         </div>

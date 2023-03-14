@@ -37,11 +37,11 @@
         <form class="php-email-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
           <div class="row">
             <div class="col-md-6 form-group">
-              <input type="text" name="name" class="form-control" id="name" placeholder="Tu Nombre" formControlName="name">
+              <input type="text" name="name" class="form-control" id="namecontact" placeholder="Tu Nombre" formControlName="name">
               <div class="alert alert-danger" role="alert" *ngIf="contactForm.get('name').touched && contactForm.get('name').errors">{{getError('name')}}</div>
             </div>
             <div class="col-md-6 form-group mt-3 mt-md-0">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Tu Email" formControlName="email">
+              <input type="email" class="form-control" name="email" id="emailcontact" placeholder="Tu Email" formControlName="email">
               <div class="alert alert-danger" role="alert" *ngIf="contactForm.get('email').touched && contactForm.get('email').errors">{{getError('email')}}</div>
             </div>
           </div>

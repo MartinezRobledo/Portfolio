@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Route, Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 import { Education } from '../Models/Educacion';
 import { Experiencia } from '../Models/Experiencia';
-import { AuthService } from '../services/auth.service';
 import { DataService } from '../services/data.service';
+import { SharingService } from '../services/sharing.service';
 
 @Component({
   selector: 'app-resumen',
@@ -16,17 +17,16 @@ export class ResumenComponent implements OnInit {
 
   formacion:Education[];
   experiencia:Experiencia[];
-  login$ = this.auth.loggedIn$;
-  edition: boolean;
-  availForm:boolean = false;
+  estadoDeSesion$:Observable<boolean>;
+  modalActive:boolean = true;
 
   resumeForm:FormGroup;
   expForm:FormGroup;
 
-  constructor(private dataService:DataService, private fb:FormBuilder, private auth:AuthService) { 
-    this.edition = this.dataService.edition;
-    this.formacion = this.dataService.formacion;
-    this.experiencia = this.dataService.experiencia;
+  constructor(private dataService:DataService, private fb:FormBuilder, private sharing:SharingService, public router:Router) { 
+    this.formacion = [...dataService.formacion];
+    this.experiencia = [...dataService.experiencia];
+    this.estadoDeSesion$ = sharing.getEstadoDeSesion;
   }
 
   ngOnInit(): void {
@@ -58,17 +58,14 @@ export class ResumenComponent implements OnInit {
     });
   }
 
-  validateEdition(){
-    this.dataService.edition = true;
-  }
-
-  eliminarElemento(i:number){
+  eliminarExperiencia(i:number){
     this.dataService.removeExperiencia(this.experiencia[i].id).subscribe();
     this.experiencia.splice(i, 1);
   }
 
-  saveChanges(){
-    this.dataService.edition = false;
+  eliminarFormacion(i:number){
+    this.dataService.removeFormacion(this.formacion[i].id).subscribe();
+    this.formacion.splice(i, 1);
   }
 
   onSubmit(){

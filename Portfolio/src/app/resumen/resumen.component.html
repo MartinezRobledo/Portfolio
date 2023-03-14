@@ -4,7 +4,7 @@
     <div class="section-title">
       <div class="edit-title">
         <h2>Resumen</h2>
-        <i routerLink="/resumen" routerLinkActive='visually-hidden'  class='bi bi-pen-fill edit-icon' *ngIf="login$ | async" (click)="validateEdition()"></i>
+        <i routerLink="/resumen" routerLinkActive='visually-hidden'  class='bi bi-pen-fill edit-icon' *ngIf="estadoDeSesion$ | async"></i>
       </div>
       <p>Me recibí de técnico en Electrónica en la EESTN°1 De Merlo y fue ahí dónde hice mi primer contacto 
           con la programación, la cuál luego se convertiría en una de mis mayores pasiones.
@@ -18,7 +18,7 @@
       <div class="col-lg-6">
         <h3 class="resume-title">Educación</h3>
         <div class="d-flex flex-row"  *ngFor="let education of formacion; let i=index">
-          <button class="rounded-circle btn btn-danger p-2 btn-close m-close" (click)="eliminarElemento(i)" *ngIf="edition"></button>
+          <button class="rounded-circle btn btn-danger p-2 btn-close m-close" (click)="eliminarFormacion(i)" *ngIf="router.url === '/resumen'"></button>
           <div class="resume-item p-4">
             <h4>{{education.degree}}</h4>
             <h5>{{education.since}}-{{education.until}}</h5>
@@ -32,13 +32,13 @@
           </div>
         </div>
         <div class="d-flex flex-row">
-          <button class="rounded-circle btn btn-success" *ngIf="edition" (click)="modal.showModal()">+</button>
+          <button class="rounded-circle btn btn-success" *ngIf="router.url === '/resumen'" (click)="modal.statementModal(modalActive)">+</button>
         </div>
       </div>
       <div class="col-lg-6">
         <h3 class="resume-title">Experiencia Laboral</h3>
         <div class="d-flex flex-row"  *ngFor="let exp of experiencia; let i=index">
-          <button class="rounded-circle btn btn-danger p-2 btn-close m-close" (click)="eliminarElemento(i)" *ngIf="edition"></button>
+          <button class="rounded-circle btn btn-danger p-2 btn-close m-close" (click)="eliminarExperiencia(i)" *ngIf="router.url === '/resumen'"></button>
           <div class="resume-item p-4">
             <h4>{{exp.rol}}</h4>
             <h5>{{exp.since}}-{{exp.until}}</h5>
@@ -52,7 +52,7 @@
           </div>
         </div>
         <div class="d-flex flex-row">
-          <button class="rounded-circle btn btn-success" *ngIf="edition" (click)="modal2.showModal()">+</button>
+          <button class="rounded-circle btn btn-success" *ngIf="router.url === '/resumen'" (click)="modal2.statementModal(modalActive)">+</button>
         </div>
       </div>
     </div>
@@ -61,14 +61,14 @@
               <form class="php-email-form" #updateForm="ngForm">
               </form>
         <div class="d-flex justify-content-center">
-          <div class="m-3"><button class="bttn bttn-success" routerLink="" (click)="saveChanges()">Volver</button></div>
+          <div class="m-3"><button class="bttn bttn-success" routerLink="">Volver</button></div>
         </div>
       </div>
     </div>
   </div>
 </section><!-- End Resume Section -->
 <app-modal #modal [title]="'NUEVA FORMACIÓN'">
-  <form class="php-email-form" [formGroup]="resumeForm" (ngSubmit)="onSubmit(); modal.hideModal()">
+  <form class="php-email-form" [formGroup]="resumeForm" (ngSubmit)="onSubmit(); modal.statementModal(!modalActive)">
     <div class="form-group">
       <label for="degree">Carrera o Curso:</label>
       <input type="text" name="degree" class="form-ctrl" id="degree" placeholder="Título" formControlName="degree" [ngClass]="{'form-ctrl-error': resumeForm.get('degree').touched && resumeForm.get('degree').errors}">
@@ -111,7 +111,7 @@
 </app-modal>
 
 <app-modal #modal2 [title]="'NUEVA EXPERIENCIA'">
-  <form class="php-email-form" [formGroup]="expForm" (ngSubmit)="exponSubmitexp(); modal2.hideModal()">
+  <form class="php-email-form" [formGroup]="expForm" (ngSubmit)="exponSubmitexp(); modal2.statementModal(!modalActive)">
     <div class="form-group">
       <label for="rol">Cargo laboral:</label>
       <input type="text" name="rol" class="form-ctrl" id="rol" placeholder="Puesto" formControlName="rol" [ngClass]="{'form-ctrl-error': expForm.get('rol').touched && expForm.get('rol').errors}">

@@ -12,9 +12,10 @@ export class ProyectsComponent implements OnInit {
   proyectos:Proyects[];
   proyectLink:string;
   proyectName:string;
+  modalActive:boolean=true;
 
   constructor(private dataService:DataService) {
-    this.proyectos = this.dataService.proyectos;
+    this.proyectos = [...dataService.proyectos];
   }
 
   ngOnInit(){

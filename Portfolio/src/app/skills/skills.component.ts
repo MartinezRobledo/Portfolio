@@ -1,9 +1,11 @@
 
 import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { Habilidad } from '../Models/Habilidad';
 import { AuthService } from '../services/auth.service';
 import { DataService } from '../services/data.service';
+import { SharingService } from '../services/sharing.service';
 
 @Component({
   selector: 'app-skills',
@@ -16,21 +18,26 @@ export class SkillsComponent {
   skillsCol1:Habilidad[];
   skillsCol2:Habilidad[];
   newSkill:FormGroup;
-  login$ = this.auth.loggedIn$;
+  estadoDeSesion$:Observable<boolean>;
   delete:boolean = false;
   update:boolean = false;
 
-  constructor(private dataService:DataService, private auth:AuthService, private fb:FormBuilder) {
+  constructor(private dataService:DataService, private auth:AuthService, private fb:FormBuilder, private sharing:SharingService) {
     this.skillsCol1= [...this.dataService.skills];
     this.skillsCol2 = this.skillsCol1.splice(0, (this.skillsCol1.length)/2);
     this.newSkill = this.fb.group({
       name:['', [Validators.required, Validators.minLength(2)]],
       value:['', [Validators.required, Validators.pattern(/^\d+$/)]]
     });
+    this.estadoDeSesion$ = this.sharing.getEstadoDeSesion;
    }
 
   onSubmit(){
     this.dataService.addSkill(this.newSkill.value).subscribe();
+    this.dataService.getSkills().subscribe(skills =>{
+      this.skillsCol1 = skills;
+      this.skillsCol2 = this.skillsCol1.splice(0, (this.skillsCol1.length)/2);
+    });
   }
 
   validarType(value:number): string {
@@ -52,8 +59,12 @@ export class SkillsComponent {
   }
 
   eliminarElemento(id:number){
-    console.log(id);
     this.dataService.removeSkill(id).subscribe();
+
+    this.dataService.getSkills().subscribe(skills =>{
+      this.skillsCol1 = skills;
+      this.skillsCol2 = this.skillsCol1.splice(0, (this.skillsCol1.length)/2);
+    });
   }
 
   actualizarElemento(id:number,skill:Habilidad){

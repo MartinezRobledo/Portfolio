@@ -7,7 +7,6 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Experiencia } from '../Models/Experiencia';
 import { AuthService } from './auth.service';
-import { SharingService } from './sharing.service';
 import { getAuth } from "firebase/auth";
 
 @Injectable({
@@ -15,11 +14,11 @@ import { getAuth } from "firebase/auth";
 })
 export class DataService {
 
-  private _urlData = "http://localhost:8080/datos";
-  private _urlSkills = "http://localhost:8080/skills";
-  private _urlProyectos = "http://localhost:8080/proyectos";
-  private _urlEducacion = "http://localhost:8080/educacion";
-  private _urlExperiencia = "http://localhost:8080/experiencia";
+  private _urlData = "https://apirest-portfolio.onrender.com/datos";
+  private _urlSkills = "https://apirest-portfolio.onrender.com/skills";
+  private _urlProyectos = "https://apirest-portfolio.onrender.com/proyectos";
+  private _urlEducacion = "https://apirest-portfolio.onrender.com/educacion";
+  private _urlExperiencia = "https://apirest-portfolio.onrender.com/experiencia";
 
   persona:Persona;
   skills:Habilidad[];

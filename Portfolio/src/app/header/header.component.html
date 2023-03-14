@@ -21,12 +21,12 @@
     </div>
     <div>
       <div class="login" (click)="[modal.statementModal(modalActive)]" [ngClass]="{'active':!(estadoDeSesion$ | async)}">
-        <i class="bi bi-box-arrow-in-right"></i>
-        <p>login/signin</p>
+        <button class="btn btn-light"><i class="bi bi-box-arrow-in-right"></i>
+        <p>log in/sign up</p></button>
       </div>
       <div class="login" (click)="logout()" [ngClass]="{'active':estadoDeSesion$ | async}">
-        <i class="bi bi-box-arrow-left"></i>
-        <p>logout</p>
+        <button class="btn btn-light"><i class="bi bi-box-arrow-left"></i>
+        <p>logout</p></button>
       </div>
     </div>
     <i class="bi bi-list mobile-nav-toggle d-xl-none d-lg-none" (click)="alternarClase()"></i>

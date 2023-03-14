@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { Persona } from '../Models/Persona';
 import { AuthService } from '../services/auth.service';
@@ -20,7 +21,7 @@ export class AboutMeComponent implements OnInit {
 
   nuevosDatos:FormGroup;
 
-  constructor(private dataService:DataService, private formBuilder:FormBuilder, private auth:AuthService, private sharing:SharingService) {
+  constructor(private dataService:DataService, private formBuilder:FormBuilder, private auth:AuthService, private sharing:SharingService, private toast:ToastrService) {
     this.estadoDeSesion$ = sharing.getEstadoDeSesion;
     this.persona = Object.assign({}, this.dataService.persona);
     this.buildForm();
@@ -73,8 +74,13 @@ export class AboutMeComponent implements OnInit {
     this.persona.studylevel = this.nuevosDatos.value.studylevel;
     this.persona.phone = this.nuevosDatos.value.phone;
     this.persona.email = this.nuevosDatos.value.email;
-    this.dataService.actualizarDatos(this.persona).subscribe(() => {
-      location.reload();
+    this.dataService.actualizarDatos(this.persona).subscribe(response => {
+      if(response != null){
+        this.toast.error("No posee permisos de administrador");
+      }
+      else{
+        location.reload();
+      }
     });
   }
 
@@ -120,7 +126,6 @@ export class AboutMeComponent implements OnInit {
 
   SendDataonChange(event: any) {
     this.edad = this.CalculateAge(event.target.value);
-    console.log(event.target.value);
   }
 
   restoreData(){

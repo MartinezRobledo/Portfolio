@@ -1,6 +1,7 @@
 
 import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { Habilidad } from '../Models/Habilidad';
 import { AuthService } from '../services/auth.service';
@@ -22,7 +23,7 @@ export class SkillsComponent {
   delete:boolean = false;
   update:boolean = false;
 
-  constructor(private dataService:DataService, private auth:AuthService, private fb:FormBuilder, private sharing:SharingService) {
+  constructor(private dataService:DataService, private auth:AuthService, private fb:FormBuilder, private sharing:SharingService, private toast:ToastrService) {
     this.skillsCol1= [...this.dataService.skills];
     this.skillsCol2 = this.skillsCol1.splice(0, (this.skillsCol1.length)/2);
     this.newSkill = this.fb.group({
@@ -33,10 +34,17 @@ export class SkillsComponent {
    }
 
   onSubmit(){
-    this.dataService.addSkill(this.newSkill.value).subscribe();
-    this.dataService.getSkills().subscribe(skills =>{
-      this.skillsCol1 = skills;
-      this.skillsCol2 = this.skillsCol1.splice(0, (this.skillsCol1.length)/2);
+    this.dataService.addSkill(this.newSkill.value).subscribe(response => {
+      if(response === null){
+        this.dataService.getSkills().subscribe(skills =>{
+          this.skillsCol1 = [...skills];
+          this.skillsCol2 = this.skillsCol1.splice(0, (this.skillsCol1.length)/2);
+        });
+      }
+      else{
+        this.newSkill.reset();
+        this.toast.error("No posee permisos de administrador");
+      }
     });
   }
 
@@ -59,11 +67,16 @@ export class SkillsComponent {
   }
 
   eliminarElemento(id:number){
-    this.dataService.removeSkill(id).subscribe();
-
-    this.dataService.getSkills().subscribe(skills =>{
-      this.skillsCol1 = skills;
-      this.skillsCol2 = this.skillsCol1.splice(0, (this.skillsCol1.length)/2);
+    this.dataService.removeSkill(id).subscribe(response =>{
+      if(response === null){
+        this.dataService.getSkills().subscribe(skills =>{
+          this.skillsCol1 = [...skills];
+          this.skillsCol2 = this.skillsCol1.splice(0, (this.skillsCol1.length)/2);
+        });
+      }
+      else{
+        this.toast.error("No posee permisos de administrador");
+      }
     });
   }
 

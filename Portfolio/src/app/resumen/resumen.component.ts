@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable, Subscription } from 'rxjs';
 import { Education } from '../Models/Educacion';
 import { Experiencia } from '../Models/Experiencia';
@@ -23,7 +24,7 @@ export class ResumenComponent implements OnInit {
   resumeForm:FormGroup;
   expForm:FormGroup;
 
-  constructor(private dataService:DataService, private fb:FormBuilder, private sharing:SharingService, public router:Router) { 
+  constructor(private dataService:DataService, private fb:FormBuilder, private sharing:SharingService, public router:Router, private toast:ToastrService) { 
     this.formacion = [...dataService.formacion];
     this.experiencia = [...dataService.experiencia];
     this.estadoDeSesion$ = sharing.getEstadoDeSesion;
@@ -59,23 +60,53 @@ export class ResumenComponent implements OnInit {
   }
 
   eliminarExperiencia(i:number){
-    this.dataService.removeExperiencia(this.experiencia[i].id).subscribe();
-    this.experiencia.splice(i, 1);
+    this.dataService.removeExperiencia(this.experiencia[i].id).subscribe(response => {
+      if(response != null){
+        this.toast.error("No posee permisos de administrador");
+      }else{
+        this.experiencia.splice(i, 1);
+      }
+    });
   }
 
   eliminarFormacion(i:number){
-    this.dataService.removeFormacion(this.formacion[i].id).subscribe();
-    this.formacion.splice(i, 1);
+    this.dataService.removeFormacion(this.formacion[i].id).subscribe(response => {
+      if(response != null){
+        this.toast.error("No posee permisos de administrador");
+      }else{
+        this.formacion.splice(i, 1);
+      }
+    });
   }
 
   onSubmit(){
     this.formacion.push(this.resumeForm.value);
-    this.dataService.addFormacion(this.formacion.at(-1)).subscribe();
+    this.dataService.addFormacion(this.formacion.at(-1)).subscribe(response => {
+      if(response != null){
+        window.scroll({ 
+          top: 0, 
+          left: 0, 
+          behavior: 'smooth' 
+        })
+        this.toast.error("No posee permisos de administrador");
+        this.formacion.pop();
+      }
+    });
   }
 
   exponSubmitexp(){
     this.experiencia.push(this.expForm.value);
-    this.dataService.addExperiencia(this.experiencia.at(-1)).subscribe();
+    this.dataService.addExperiencia(this.experiencia.at(-1)).subscribe(response => {
+      if(response != null){
+        window.scroll({ 
+          top: 0, 
+          left: 0, 
+          behavior: 'smooth' 
+        })
+        this.toast.error("No posee permisos de administrador");
+        this.experiencia.pop();
+      }
+    });
   }
 
   public getError(controlName: string):string{

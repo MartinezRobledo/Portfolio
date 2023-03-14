@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { Experiencia } from '../Models/Experiencia';
 import { AuthService } from './auth.service';
 import { SharingService } from './sharing.service';
+import { getAuth } from "firebase/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,9 @@ export class DataService {
   proyectos:Proyects[];
   formacion:Education[];
   experiencia:Experiencia[];
+
+  private authority = getAuth();
+  private uid = "F4HT7d1GpXZ0pbduSmTtCKSX9NQ2";
 
   constructor(private http:HttpClient, private auth:AuthService) {
     this.getDatos().subscribe(datos =>{
@@ -68,45 +72,75 @@ export class DataService {
     return this.http.get<Proyects[]>(`${this._urlProyectos}`);
   }
 
-  actualizarDatos(persona:Persona):Observable<Object>{
-    return this.http.put(`${this._urlData+'/'+persona.id}`, persona);
-  }
-
   //Modificacion de Base de Datos
   addFormacion(formacion:Education):Observable<Object>{
-    return this.http.post(`${this._urlEducacion}`, formacion);
+    if(this.uid === this.authority.currentUser.uid)
+      return this.http.post(`${this._urlEducacion}`, formacion);
+    else
+      return this.http.get(`${this._urlData}`)
   }
 
   removeFormacion(id:number):Observable<Object>{
-    return this.http.delete(`${this._urlEducacion+'/'+id}`);
+    if(this.uid === this.authority.currentUser.uid)
+      return this.http.delete(`${this._urlEducacion+'/'+id}`);
+    else
+      return this.http.get(`${this._urlData}`);
   }
 
   addSkill(skill:Habilidad):Observable<Object>{
-    return this.http.post(`${this._urlSkills}`, skill);
+    if(this.uid === this.authority.currentUser.uid)
+      return this.http.post(`${this._urlSkills}`, skill);
+    else
+      return this.http.get(`${this._urlSkills}`);
   }
 
   removeSkill(id:number):Observable<Object>{
-    return this.http.delete(`${this._urlSkills+'/'+id}`);
+    if(this.uid === this.authority.currentUser.uid)
+      return this.http.delete(`${this._urlSkills+'/'+id}`);
+    else
+      return this.http.get(`${this._urlData}`);
   }
 
   updateSkill(id:number, skill:Habilidad):Observable<Object>{
-    return this.http.put(`${this._urlSkills+'/'+id}`, skill);
+    if(this.uid === this.authority.currentUser.uid)
+      return this.http.put(`${this._urlSkills+'/'+id}`, skill);
+    else
+      return this.http.get(`${this._urlData}`);
   }
 
   addProyectos(proyecto:Proyects):Observable<Object>{
-    return this.http.post(`${this._urlProyectos}`, proyecto);
+    if(this.uid === this.authority.currentUser.uid)
+      return this.http.post(`${this._urlProyectos}`, proyecto);
+    else
+      return this.http.get(`${this._urlData}`);
   }
 
   removeProyectos(id:number):Observable<Object>{
-    return this.http.delete(`${this._urlProyectos+'/'+id}`);
+    if(this.uid === this.authority.currentUser.uid)
+      return this.http.delete(`${this._urlProyectos+'/'+id}`);
+    else
+      return this.http.get(`${this._urlData}`);
   }
 
   addExperiencia(experiencia:Experiencia):Observable<Object>{
-    return this.http.post(`${this._urlExperiencia}`, experiencia);
+    if(this.uid === this.authority.currentUser.uid)
+      return this.http.post(`${this._urlExperiencia}`, experiencia);
+    else
+      return this.http.get(`${this._urlData}`);
   }
 
   removeExperiencia(id:number):Observable<Object>{
-    return this.http.delete(`${this._urlExperiencia+'/'+id}`);
+    if(this.uid === this.authority.currentUser.uid)
+      return this.http.delete(`${this._urlExperiencia+'/'+id}`);
+    else
+      return this.http.get(`${this._urlData}`);
+  }
+
+  actualizarDatos(persona:Persona):Observable<Object>{
+    if(this.uid === this.authority.currentUser.uid)
+      return this.http.put(`${this._urlData+'/'+persona.id}`, persona);
+    else
+      return this.http.get(`${this._urlData}`);
   }
 }
 

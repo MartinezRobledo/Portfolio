@@ -8,24 +8,28 @@
 
     <div class="row mt-1">
 
-      <div class="col-lg-4">
+      <div class="col-lg-3">
         <div class="info">
-          <div class="address">
+          
+          <div class="address popup" [cdkCopyToClipboard]="persona.address" (click)="showpopupads()">
+            <span class="popuptext" id="myPopup" [ngClass]="{'show' : popaddress }">copiado al clipboard!</span>
             <i class="bi bi-geo-alt"></i>
             <h4>Ubicacion:</h4>
-            <p>Merlo, Buenos Aires, Argentina</p>
+            <p>{{persona.address}}</p>
           </div>
 
-          <div class="email">
+          <div class="email popup" [cdkCopyToClipboard]="persona.email" (click)="showpopupemail()">
+            <span class="popuptext" id="myPopup" [ngClass]="{'show' : popemail }">copiado al clipboard!</span>
             <i class="bi bi-envelope"></i>
             <h4>Email:</h4>
-            <p>adrianfmart@gmail.com</p>
+            <p>{{persona.email}}</p>
           </div>
 
-          <div class="phone">
+          <div class="phone popup" [cdkCopyToClipboard]="persona.phone" (click)="showpopupphone()">
+            <span class="popuptext" id="myPopup" [ngClass]="{'show' : popphone }">copiado al clipboard!</span>
             <i class="bi bi-phone"></i>
             <h4>Cel:</h4>
-            <p>(+54) 1128932478</p>
+            <p>(+54) {{persona.phone}}</p>
           </div>
 
         </div>

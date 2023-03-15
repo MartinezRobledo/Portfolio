@@ -2,20 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { Persona } from '../Models/Persona';
+import { DataService } from '../services/data.service';
 import { SharingService } from '../services/sharing.service';
+
 
 @Component({
   selector: 'app-contacto',
   templateUrl: './contacto.component.html',
-  styleUrls: ['./contacto.component.sass']
+  styleUrls: ['./contacto.component.scss']
 })
 export class ContactoComponent implements OnInit {
 
   contactForm:FormGroup;
   estadoDeSesion$:Observable<boolean>;
+  persona:Persona;
+  popaddress = false;
+  popemail = false;
+  popphone = false;
 
-  constructor(private fb:FormBuilder, private toastr:ToastrService, private sharing:SharingService) { 
+  constructor(private fb:FormBuilder, private toastr:ToastrService, private sharing:SharingService, private dataService:DataService) { 
     this.estadoDeSesion$ = sharing.getEstadoDeSesion;
+    this.persona = Object.assign({}, this.dataService.persona); 
   }
 
   ngOnInit(): void {
@@ -93,6 +101,24 @@ export class ContactoComponent implements OnInit {
         break;
     }
     return message;
+  }
+
+  showpopupads(){
+    this.popaddress = true;
+    this.popemail =false;
+    this.popphone = false;
+  }
+  
+  showpopupemail(){
+    this.popemail = true;
+    this.popaddress = false;
+    this.popphone = false;
+  }
+
+  showpopupphone(){
+    this.popphone = true;
+    this.popaddress =false;
+    this.popemail= false;
   }
 
 }

@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
       lastname:['',[Validators.required]],
       username:['',[Validators.required]],
       email:['',[Validators.required]],
-      password:['',[Validators.required, Validators.maxLength(8), Validators.minLength(8)]],
+      password:['',[Validators.required, Validators.maxLength(15), Validators.minLength(6)]],
       rPassword:['',[Validators.required]]
     });
     

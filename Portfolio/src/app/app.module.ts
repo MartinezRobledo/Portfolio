@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxTypedJsModule } from 'ngx-typed-js';
 import { HttpClientModule } from '@angular/common/http';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 //Componentes
 import { AppComponent } from './app.component';
@@ -27,6 +28,7 @@ import { SafePipe } from './safe.pipe';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
+import { LoaderBarrasComponent } from './shared/loaders/loader-barras/loader-barras.component';
 
 
 export function parameterProviderFactory(provider: DataService) {
@@ -47,6 +49,7 @@ export function parameterProviderFactory(provider: DataService) {
     HeaderComponent,
     ModalComponent,
     SafePipe,
+    LoaderBarrasComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +63,8 @@ export function parameterProviderFactory(provider: DataService) {
     ToastrModule.forRoot(),
     HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth())
+    provideAuth(() => getAuth()),
+    ClipboardModule
   ],
   providers: [{
         provide: APP_INITIALIZER,

@@ -10,6 +10,7 @@ import { SetEverythingOffExcept } from '../services/NavHelpers'
 
 export class HomeComponent implements OnInit {
   
+
 @HostListener('window:scroll', ['$event'])
   public onViewportScroll(e:any) {
     let child = e.srcElement.children[0]

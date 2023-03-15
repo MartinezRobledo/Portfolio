@@ -1,6 +1,7 @@
 
 import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { Habilidad } from '../Models/Habilidad';
@@ -22,8 +23,11 @@ export class SkillsComponent {
   estadoDeSesion$:Observable<boolean>;
   delete:boolean = false;
   update:boolean = false;
+  cargando:boolean = false;
+  cargandoadd:boolean = false;
 
-  constructor(private dataService:DataService, private auth:AuthService, private fb:FormBuilder, private sharing:SharingService, private toast:ToastrService) {
+  constructor(private dataService:DataService, private auth:AuthService, 
+              private fb:FormBuilder, private sharing:SharingService, private toast:ToastrService, private router:Router) {
     this.skillsCol1= [...this.dataService.skills];
     this.skillsCol2 = this.skillsCol1.splice(0, (this.skillsCol1.length)/2);
     this.newSkill = this.fb.group({
@@ -34,11 +38,13 @@ export class SkillsComponent {
    }
 
   onSubmit(){
+    this.cargandoadd = true;
     this.dataService.addSkill(this.newSkill.value).subscribe(response => {
       if(response === null){
         this.dataService.getSkills().subscribe(skills =>{
           this.skillsCol1 = [...skills];
           this.skillsCol2 = this.skillsCol1.splice(0, (this.skillsCol1.length)/2);
+          this.cargandoadd = false;
         });
       }
       else{
@@ -67,15 +73,18 @@ export class SkillsComponent {
   }
 
   eliminarElemento(id:number){
+    this.cargando = true;
     this.dataService.removeSkill(id).subscribe(response =>{
       if(response === null){
         this.dataService.getSkills().subscribe(skills =>{
           this.skillsCol1 = [...skills];
           this.skillsCol2 = this.skillsCol1.splice(0, (this.skillsCol1.length)/2);
+          this.cargando = false;
         });
       }
       else{
         this.toast.error("No posee permisos de administrador");
+        this.cargando = false;
       }
     });
   }
